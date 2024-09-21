@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StudentRegister.Models;
+using StudentRegister.Models.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,9 +11,9 @@ namespace StudentRegister.Controllers
     {
         // GET: api/Nationalities
         [HttpGet]
-        public IEnumerable<Nationality> Get()
+        public IEnumerable<NationalityDTO> Get()
         {
-            return new Nationality[] { new() { Id = 1, Title="Bangladesh", Value = "BD" } };
+            return new NationalityDTO[] { new() { Id = 1, Title="Bangladesh", Value = "BD" } };
         }
     }
 }

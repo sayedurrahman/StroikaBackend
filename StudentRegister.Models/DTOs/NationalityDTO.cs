@@ -1,6 +1,6 @@
-﻿namespace StudentRegister.Models
+﻿namespace StudentRegister.Models.DTOs
 {
-    public class Nationality
+    public class NationalityDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }

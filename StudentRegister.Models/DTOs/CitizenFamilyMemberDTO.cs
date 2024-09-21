@@ -1,8 +1,8 @@
 ﻿using StudentRegister.Models.BaseModels;
 
-namespace StudentRegister.Models
+namespace StudentRegister.Models.DTOs
 {
-    public class CitizenFamilyMember: Citizen
+    public class CitizenFamilyMemberDTO : Citizen
     {
         public DateTime DateOfBirth { get; set; }
         public int RelationshipId { get; set; }

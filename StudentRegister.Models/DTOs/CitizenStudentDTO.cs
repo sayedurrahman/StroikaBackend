@@ -1,6 +1,6 @@
 ﻿using StudentRegister.Models.BaseModels;
 
-namespace StudentRegister.Models
+namespace StudentRegister.Models.DTOs
 {
-    public class CitizenStudent : Citizen { }
+    public class CitizenStudentDTO : Citizen { }
 }
