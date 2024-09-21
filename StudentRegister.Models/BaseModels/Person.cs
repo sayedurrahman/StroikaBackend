@@ -1,6 +1,6 @@
-﻿namespace StudentRegister.Models
+﻿namespace StudentRegister.Models.BaseModels
 {
-    public class Person
+    public abstract class Person
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
