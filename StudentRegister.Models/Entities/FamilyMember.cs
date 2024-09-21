@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentRegister.Models.Entities
+﻿namespace StudentRegister.Models.Entities
 {
-    internal class FamilyMember
+    public class FamilyMember
     {
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int NationalityId { get; set; }
+        public int RelationshipId { get; set; }
+
+        public DateTime AddedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

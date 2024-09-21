@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentRegister.Models.Enums
+﻿namespace StudentRegister.Models.Enums
 {
-    internal class Relations
+    public enum Relations
     {
+        Parent = 1,
+        Sibling,
+        Spouse
     }
 }

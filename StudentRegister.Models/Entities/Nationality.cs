@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentRegister.Models.Entities
+﻿namespace StudentRegister.Models.Entities
 {
-    internal class Nationality
+    public class Nationality
     {
+        public int Id { get; set; }
+        public string NationalityName { get; set; }
+        public string Country { get; set; }
+        public string Alpha2Code { get; set; }
     }
 }
