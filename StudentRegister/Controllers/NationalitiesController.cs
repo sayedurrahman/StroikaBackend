@@ -13,7 +13,7 @@ namespace StudentRegister.Controllers
         [HttpGet]
         public IEnumerable<NationalityDTO> Get()
         {
-            return new NationalityDTO[] { new() { Id = 1, Title="Bangladesh", Value = "BD" } };
+            return new NationalityDTO[] { new() { Id = 1, Name="Bangladesh", AlphaCode = "BD" } };
         }
     }
 }
