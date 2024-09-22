@@ -13,6 +13,8 @@ namespace StudentRegister.DataAccess
         public StudentRegisterContext(DbContextOptions<StudentRegisterContext> options) : base(options) { }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<FamilyMember> FamilyMembers { get; set; }
+        public DbSet<Nationality> Nationalities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
