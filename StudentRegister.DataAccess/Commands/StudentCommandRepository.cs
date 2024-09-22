@@ -10,6 +10,12 @@ namespace StudentRegister.DataAccess.Commands
 {
     public class StudentCommandRepository : IStudentCommandRepository
     {
+        public StudentRegisterContext _context { get; }
+        public StudentCommandRepository(StudentRegisterContext context)
+        {
+            _context = context;
+        }
+
         public bool AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)
         {
             throw new NotImplementedException();

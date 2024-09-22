@@ -16,6 +16,7 @@ namespace StudentRegister.DataAccess.Commands
             var fm = _context.FamilyMembers.Find(familyMemberId);
             if (fm != null)
                 _context.FamilyMembers.Remove(fm);
+
             _context.SaveChanges();
         }
 

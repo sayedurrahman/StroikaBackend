@@ -14,7 +14,7 @@ namespace StudentRegister.DataAccess.Queries
 
         public IEnumerable<NationalityDTO> GetAll()
         {
-            return _studentRegisterContext.Nationalities.Select(x => new NationalityDTO() { Id = x.Id, Name = x.NationalityName, AlphaCode = x.Alpha2Code }).ToList();
+            return _studentRegisterContext.Nationalities.Select(x => new NationalityDTO(x)).ToList();
         }
     }
 }

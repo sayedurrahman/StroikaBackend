@@ -1,28 +1,33 @@
 ﻿using StudentRegister.DataAccess.Queries.Interface;
 using StudentRegister.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentRegister.DataAccess.Queries
 {
     public class StudentQueryRepository : IStudentQueryRepository
     {
+        public StudentRegisterContext _context { get; }
+        public StudentQueryRepository(StudentRegisterContext context)
+        {
+            _context = context;
+        }
+
         public StudentDTO[] GetAllStudents()
         {
-            throw new NotImplementedException();
+            return _context.Students.Select(x => new StudentDTO(x)).ToArray();
         }
 
         public FamilyMemberDTO[] GetFamilyMembersOfAStudent(int studentId)
         {
-            throw new NotImplementedException();
+            return _context.FamilyMembers.Where(x => x.StudentID == studentId).Select(x => new FamilyMemberDTO(x)).ToArray();
         }
 
         public CitizenStudentDTO GetStudentWithNationality(int studentId)
         {
-            throw new NotImplementedException();
+            var student = _context.Students.Find(studentId);
+            if (student == null)
+                throw new KeyNotFoundException();
+
+            return new CitizenStudentDTO(student);
         }
     }
 }
