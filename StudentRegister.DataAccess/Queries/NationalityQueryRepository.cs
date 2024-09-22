@@ -1,9 +1,5 @@
-﻿using StudentRegister.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentRegister.DataAccess.Queries.Interface;
+using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.DataAccess.Queries
 {

@@ -14,8 +14,4 @@
     <ProjectReference Include="..\StudentRegister.Models\StudentRegister.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\Interface\" />
-  </ItemGroup>
-
 </Project>

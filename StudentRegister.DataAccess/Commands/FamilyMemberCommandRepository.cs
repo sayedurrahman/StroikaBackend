@@ -1,10 +1,5 @@
-﻿using StudentRegister.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentRegister.DataAccess.Commands.Interface;
+using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.DataAccess.Commands
 {
