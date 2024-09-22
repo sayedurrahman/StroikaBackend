@@ -13,7 +13,8 @@ namespace StudentRegister.Controllers
         //[HttpGet("{id}")]
         private FamilyMemberDTO Get(int id)
         {
-            return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now };
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now };
+            return null;
         }
 
         // PUT api/FamilyMembers/5
@@ -34,7 +35,8 @@ namespace StudentRegister.Controllers
         [HttpGet("{id}/Nationality")]
         public CitizenFamilyMemberDTO GetFamilyMemberNationality(int id)
         {
-            return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now, NationalityId = 1 };
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now, NationalityId = 1 };
+            return null;
         }
 
         // PUT api/FamilyMembers/5/Nationality/{nId}

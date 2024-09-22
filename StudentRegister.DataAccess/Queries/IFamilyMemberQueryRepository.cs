@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentRegister.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace StudentRegister.DataAccess.Queries
 {
     public interface IFamilyMemberQueryRepository
     {
+        FamilyMemberDTO GetFamilyMember(int id);
+        CitizenFamilyMemberDTO GetFamilyMemberWithNationality(int id);
     }
 }

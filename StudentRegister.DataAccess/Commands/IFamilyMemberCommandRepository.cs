@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentRegister.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace StudentRegister.DataAccess.Commands
 {
     public interface IFamilyMemberCommandRepository
     {
+        bool UpdateFamilyMember(int familyMemberId, FamilyMemberDTO member);
+        void DeleteFamilyMember(int familyMemberId);
+        bool UpdateNationalityOfAFamilyMember(int familyMemberId, int newNationalityId);
     }
 }

@@ -61,7 +61,8 @@ namespace StudentRegister.Controllers
         [HttpGet("{id}/FamilyMembers")]
         public FamilyMemberDTO[] GetFamilyMembersOfStudent(int id)
         {
-            return new FamilyMemberDTO[] { new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now } };
+            //return new FamilyMemberDTO[] { new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now } };
+            return null;
         }
 
         // POST api/Students/5/FamilyMembers
@@ -69,7 +70,8 @@ namespace StudentRegister.Controllers
         [HttpPost("{id}/FamilyMembers")]
         public FamilyMemberDTO AddFamilyMemberOfStudent([FromBody] string value)
         {
-            return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now };
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now };
+            return null;
         }
 
         //// DELETE api/<StudentsController>/5
