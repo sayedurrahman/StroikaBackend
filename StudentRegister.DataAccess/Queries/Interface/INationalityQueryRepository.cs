@@ -1,6 +1,6 @@
 ﻿using StudentRegister.Models.DTOs;
 
-namespace StudentRegister.DataAccess.Queries
+namespace StudentRegister.DataAccess.Queries.Interface
 {
     public interface INationalityQueryRepository
     {

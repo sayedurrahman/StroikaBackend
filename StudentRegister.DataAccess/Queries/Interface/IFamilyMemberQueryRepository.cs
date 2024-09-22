@@ -1,11 +1,6 @@
 ﻿using StudentRegister.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StudentRegister.DataAccess.Queries
+namespace StudentRegister.DataAccess.Queries.Interface
 {
     public interface IFamilyMemberQueryRepository
     {
