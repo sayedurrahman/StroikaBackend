@@ -10,7 +10,7 @@ namespace StudentRegister.Models.DTOs
             ID = student.ID;
             FirstName = student.FirstName;
             LastName = student.LastName;
-            NationalityId = student.NationalityId;
+            NationalityId = student.NationalityId.HasValue? student.NationalityId.Value : 0;
         }
     }
 }

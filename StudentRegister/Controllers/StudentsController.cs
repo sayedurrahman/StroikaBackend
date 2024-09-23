@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentRegister.Application.Commands.Interfaces;
+using StudentRegister.Models.Commands;
 using StudentRegister.Models.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,13 +11,20 @@ namespace StudentRegister.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
+        private readonly ICommandHandler<AddStudentCommand> addStudentHandler;
+
+        public StudentsController(ICommandHandler<AddStudentCommand> addStudentHandler)
+        {
+            this.addStudentHandler = addStudentHandler;
+        }
+
         // GET: api/Students
         [HttpGet]
         public IEnumerable<StudentDTO> Get()
         {
             return new StudentDTO[] {
-                new() { ID = 1, FirstName = "John", LastName= "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")},
-                new() { ID = 2, FirstName = "John2", LastName= "Doe2", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")}
+                //new() { ID = 1, FirstName = "John", LastName= "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")},
+                //new() { ID = 2, FirstName = "John2", LastName= "Doe2", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")}
             };
         }
 
@@ -23,14 +32,17 @@ namespace StudentRegister.Controllers
         //[HttpGet("{id}")]
         private StudentDTO Get(int id)
         {
-            return new() { ID = 1, FirstName = "John", LastName = "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z") };
+            return null;
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z") };
         }
 
         // POST api/Students
         //TODO: check input
         [HttpPost]
-        public StudentDTO Post([FromBody] string value)
+        public StudentDTO Post(string firstName, string lastName, DateTime dob)
         {
+            AddStudentCommand command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            addStudentHandler.Handle(command);
             return Get(0);
         }
 
@@ -46,7 +58,8 @@ namespace StudentRegister.Controllers
         [HttpGet("{id}/Nationality")]
         public CitizenStudentDTO GetCitizenStudent(int id)
         {
-            return new() { ID = 1, FirstName = "John", LastName = "Doe", NationalityId = 1 };
+            return null;
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", NationalityId = 1 };
         }
 
 

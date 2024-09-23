@@ -1,6 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using StudentRegister.Application.Commands.CommandHandler;
+using StudentRegister.Application.Commands.Interfaces;
+using StudentRegister.DataAccess.Commands;
+using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.DataAccess.Queries;
 using StudentRegister.DataAccess.Queries.Interfaces;
+using StudentRegister.Models.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,4 +48,7 @@ static void RegisterDependencies(WebApplicationBuilder builder) =>
     builder.Services
            .AddScoped<INationalityQueryRepository, NationalityQueryRepository>()
            .AddScoped<IStudentQueryRepository, StudentQueryRepository>()
-           .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>();
+           .AddScoped<IStudentCommandRepository, StudentCommandRepository>()
+           .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
+           .AddScoped<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
+           .AddScoped<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>();

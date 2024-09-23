@@ -19,6 +19,7 @@ namespace StudentRegister.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Student>().HasOne(s => s.Nationality).WithOne().HasForeignKey<Student>(s => s.NationalityId).IsRequired(false);
             modelBuilder.Entity<FamilyMember>().HasOne(x => x.Student).WithMany(x => x.FamilyMembers).HasForeignKey(x => x.StudentID).OnDelete(DeleteBehavior.Restrict);
 
             InitianDataSeeding(modelBuilder);

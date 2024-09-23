@@ -1,4 +1,5 @@
 ﻿using StudentRegister.DataAccess.Commands.Interfaces;
+using StudentRegister.Models.Commands;
 using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Entities;
 
@@ -12,9 +13,9 @@ namespace StudentRegister.DataAccess.Commands
             _context = context;
         }
         
-        public void AddStudent(StudentDTO student)
+        public void AddStudent(AddStudentCommand student)
         {
-            _context.Students.Add(new Models.Entities.Student
+            _context.Students.Add(new Student
             {
                 FirstName = student.FirstName,
                 LastName = student.LastName,
@@ -28,7 +29,7 @@ namespace StudentRegister.DataAccess.Commands
 
         public void AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)
         {
-            _context.FamilyMembers.Add(new Models.Entities.FamilyMember
+            _context.FamilyMembers.Add(new FamilyMember
             {
                 StudentID = studentId,
                 FirstName = familyMember.FirstName,
