@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using StudentRegister.DataAccess;
+using StudentRegister.DataAccess.Queries;
+using StudentRegister.DataAccess.Queries.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<StudentRegisterContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StudentRegisterConnection")));
+builder.Services.AddDbContext<StudentRegister.DataAccess.StudentRegisterContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StudentRegisterConnection")));
+
+RegisterDependencies(builder);
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<StudentRegisterContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<StudentRegister.DataAccess.StudentRegisterContext>();
 
     // Delete and recreate the database on each startup
     dbContext.Database.EnsureDeleted();
@@ -35,3 +38,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static void RegisterDependencies(WebApplicationBuilder builder) =>
+    builder.Services
+           .AddScoped<INationalityQueryRepository, NationalityQueryRepository>()
+           .AddScoped<IStudentQueryRepository, StudentQueryRepository>()
+           .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>();

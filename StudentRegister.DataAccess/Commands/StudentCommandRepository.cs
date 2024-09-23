@@ -1,10 +1,6 @@
 ﻿using StudentRegister.DataAccess.Commands.Interface;
 using StudentRegister.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentRegister.Models.Entities;
 
 namespace StudentRegister.DataAccess.Commands
 {
@@ -15,25 +11,58 @@ namespace StudentRegister.DataAccess.Commands
         {
             _context = context;
         }
-
-        public bool AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)
+        
+        public void AddStudent(StudentDTO student)
         {
-            throw new NotImplementedException();
+            _context.Students.Add(new Models.Entities.Student
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                DateOfBirth = student.DateOfBirth,
+                AddedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now,
+                FamilyMembers = new List<FamilyMember>()
+            });
+            _context.SaveChanges();
         }
 
-        public bool AddStudent(StudentDTO student)
+        public void AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)
         {
-            throw new NotImplementedException();
+            _context.FamilyMembers.Add(new Models.Entities.FamilyMember
+            {
+                StudentID = studentId,
+                FirstName = familyMember.FirstName,
+                LastName = familyMember.LastName,
+                RelationshipId = familyMember.RelationshipId,
+                DateOfBirth = familyMember.DateOfBirth,
+                AddedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now,
+            });
+            _context.SaveChanges();
         }
 
-        public bool UpdateNationalityOfStudent(int studentId, int NationalityId)
+        public bool UpdateNationalityOfStudent(int studentId, int nationalityId)
         {
-            throw new NotImplementedException();
+            var student = _context.Students.Find(studentId);
+            if (student == null)
+                throw new KeyNotFoundException();
+
+            student.NationalityId = nationalityId;
+            _context.SaveChanges();
+            return true;
         }
 
-        public bool UpdateStudent(int studentId, StudentDTO student)
+        public bool UpdateStudent(int studentId, StudentDTO stu)
         {
-            throw new NotImplementedException();
+            var student = _context.Students.Find(studentId);
+            if (student == null)
+                throw new KeyNotFoundException();
+
+            student.FirstName = stu.FirstName;
+            student.LastName = stu.LastName;
+            student.DateOfBirth = stu.DateOfBirth;
+            _context.SaveChanges();
+            return true;
         }
     }
 }
