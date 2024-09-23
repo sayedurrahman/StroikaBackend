@@ -1,4 +1,4 @@
-﻿using StudentRegister.DataAccess.Commands.Interface;
+﻿using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Entities;
 

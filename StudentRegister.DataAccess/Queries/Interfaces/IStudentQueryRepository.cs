@@ -1,6 +1,6 @@
 ﻿using StudentRegister.Models.DTOs;
 
-namespace StudentRegister.DataAccess.Queries.Interface
+namespace StudentRegister.DataAccess.Queries.Interfaces
 {
     public interface IStudentQueryRepository
     {

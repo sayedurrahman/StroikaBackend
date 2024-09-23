@@ -1,6 +1,6 @@
 ﻿using StudentRegister.Models.DTOs;
 
-namespace StudentRegister.DataAccess.Commands.Interface
+namespace StudentRegister.DataAccess.Commands.Interfaces
 {
     public interface IFamilyMemberCommandRepository
     {

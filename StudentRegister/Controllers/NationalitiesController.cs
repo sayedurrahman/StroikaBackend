@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.DataAccess.Queries;
-using StudentRegister.DataAccess.Queries.Interface;
+using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

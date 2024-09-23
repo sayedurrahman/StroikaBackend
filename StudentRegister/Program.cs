@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StudentRegister.DataAccess.Queries;
-using StudentRegister.DataAccess.Queries.Interface;
+using StudentRegister.DataAccess.Queries.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

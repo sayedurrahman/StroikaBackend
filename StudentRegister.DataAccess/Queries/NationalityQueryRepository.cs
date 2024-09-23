@@ -1,4 +1,4 @@
-﻿using StudentRegister.DataAccess.Queries.Interface;
+﻿using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.DataAccess.Queries
