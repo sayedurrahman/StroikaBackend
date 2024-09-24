@@ -10,6 +10,7 @@ using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.Commands;
 using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Queries;
+using StudentRegister.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,19 +51,17 @@ app.Run();
 
 static void RegisterDependencies(WebApplicationBuilder builder) =>
     builder.Services
-           //.AddScoped<StudentDTO, StudentDTO>()
-           //.AddScoped<FamilyMemberDTO, FamilyMemberDTO>()
-           //.AddScoped<CitizenStudentDTO, CitizenStudentDTO>()
-           .AddScoped<INationalityQueryRepository, NationalityQueryRepository>()
-           .AddScoped<IStudentQueryRepository, StudentQueryRepository>()
-           .AddScoped<IStudentCommandRepository, StudentCommandRepository>()
-           .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
-           .AddScoped<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
-           .AddScoped<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>()
-           .AddScoped<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>()
-           .AddScoped<ICommandHandler<UpdateStudentNationalityCommand>, UpdateStudentNationalityCommandHandler>()
-           .AddScoped<ICommandHandler<AddFamilyMemberCommand>, AddFamilyMemberCommandHandler>()
-           .AddScoped<IQueryHandler<GetAllStudentsQuery, StudentDTO[]>, GetAllStudentQueryHandler>()
-           .AddScoped<IQueryHandler<GetStudentQuery, StudentDTO>, GetStudentQueryHandler>()
-           .AddScoped<IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>, GetStudentFamilyMembersQueryHandler>()
-           .AddScoped<IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>, GetStudentWithNationalityQueryHandler>(); 
+           .AddTransient<INationalityQueryRepository, NationalityQueryRepository>()
+           .AddTransient<IStudentQueryRepository, StudentQueryRepository>()
+           .AddTransient<IStudentCommandRepository, StudentCommandRepository>()
+           .AddTransient<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
+           .AddTransient<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
+           .AddTransient<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>()
+           .AddTransient<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>()
+           .AddTransient<ICommandHandler<UpdateStudentNationalityCommand>, UpdateStudentNationalityCommandHandler>()
+           .AddTransient<ICommandHandler<AddFamilyMemberCommand>, AddFamilyMemberCommandHandler>()
+           .AddTransient<IQueryHandler<GetAllStudentsQuery, StudentDTO[]>, GetAllStudentQueryHandler>()
+           .AddTransient<IQueryHandler<GetStudentQuery, StudentDTO>, GetStudentQueryHandler>()
+           .AddTransient<IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>, GetStudentFamilyMembersQueryHandler>()
+           .AddTransient<IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>, GetStudentWithNationalityQueryHandler>()
+           .AddTransient<IStudentServices, StudentServices>();
