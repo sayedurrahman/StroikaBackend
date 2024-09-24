@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentRegister.Application.Commands.Interfaces
+﻿namespace StudentRegister.Application.Commands.Interfaces
 {
     public interface ICommandHandler<TCommand>
     {
         /// <summary>
-        /// Handles a command
-        /// Returns Id or zero
+        /// Handles a command; Returns related Id (if any) or zero
         /// </summary>
         /// <param name="t">Command</param>
         /// <returns>Id</returns>

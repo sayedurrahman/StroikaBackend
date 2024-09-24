@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentRegister.Application.Queries.Interfaces
+﻿namespace StudentRegister.Application.Queries.Interfaces
 {
     public interface IQueryHandler<TQuery,TResult>
     {
+        /// <summary>
+        /// Handles a query
+        /// </summary>
+        /// <param name="t">Query</param>
+        /// <returns>TResult</returns>
         TResult Handle(TQuery t);
     }
 }

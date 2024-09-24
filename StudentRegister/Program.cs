@@ -51,4 +51,5 @@ static void RegisterDependencies(WebApplicationBuilder builder) =>
            .AddScoped<IStudentCommandRepository, StudentCommandRepository>()
            .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
            .AddScoped<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
-           .AddScoped<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>();
+           .AddScoped<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>()
+           .AddScoped<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>();

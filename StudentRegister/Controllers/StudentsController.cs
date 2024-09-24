@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application.Commands.Interfaces;
 using StudentRegister.Models.Commands;
+using StudentRegister.Models.Queries;
 using StudentRegister.Models.DTOs;
+using StudentRegister.Models.Queries;
+using StudentRegister.Application.Queries.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,38 +14,39 @@ namespace StudentRegister.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly ICommandHandler<AddStudentCommand> addStudentHandler;
+        private readonly ICommandHandler<AddStudentCommand> addStudentCommandHandler;
+        private readonly IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler;
 
-        public StudentsController(ICommandHandler<AddStudentCommand> addStudentHandler)
+        public StudentsController(IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler, ICommandHandler<AddStudentCommand> addStudentCommandHandler)
         {
-            this.addStudentHandler = addStudentHandler;
+            this.getAllStudentsQueryHandler = getAllStudentsQueryHandler;
+            this.addStudentCommandHandler = addStudentCommandHandler;
         }
 
-        // GET: api/Students
+        /// <summary>
+        /// GET: api/Students
+        /// </summary>
+        /// <returns>List of StudentDTO</returns>
         [HttpGet]
         public IEnumerable<StudentDTO> Get()
         {
-            return new StudentDTO[] {
-                //new() { ID = 1, FirstName = "John", LastName= "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")},
-                //new() { ID = 2, FirstName = "John2", LastName= "Doe2", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z")}
-            };
+            var query = new GetAllStudentsQuery();
+            return getAllStudentsQueryHandler.Handle(query);
         }
 
-        // GET api/Students/5
-        //[HttpGet("{id}")]
-        private StudentDTO Get(int id)
-        {
-            return null;
-            //return new() { ID = 1, FirstName = "John", LastName = "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z") };
-        }
-
-        // POST api/Students
+        /// <summary>
+        /// POST api/Students
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="dob"></param>
+        /// <returns>Newly added StudentDTO</returns>
         [HttpPost]
         public StudentDTO Post(string firstName, string lastName, DateTime dob)
         {
             var command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
-            int studentId = addStudentHandler.Handle(command);
-            return new StudentDTO { ID = studentId, FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            int studentId = addStudentCommandHandler.Handle(command);
+            return new StudentDTO { ID = studentId, FirstName = firstName, LastName = lastName, DateOfBirth = dob }; // No need to fetch data that are already available
         }
 
         // PUT api/Students/5
@@ -86,10 +90,12 @@ namespace StudentRegister.Controllers
             return null;
         }
 
-        //// DELETE api/<StudentsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // GET api/Students/5
+        //[HttpGet("{id}")]
+        private StudentDTO Get(int id)
+        {
+            return null;
+            //return new() { ID = 1, FirstName = "John", LastName = "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z") };
+        }
     }
 }
