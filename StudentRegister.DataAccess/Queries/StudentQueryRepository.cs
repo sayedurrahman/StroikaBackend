@@ -1,5 +1,6 @@
 ﻿using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StudentRegister.DataAccess.Queries
 {
@@ -14,6 +15,15 @@ namespace StudentRegister.DataAccess.Queries
         public StudentDTO[] GetAllStudents()
         {
             return _context.Students.Select(x => new StudentDTO(x)).ToArray();
+        }
+
+        public StudentDTO GetAStudent(int studentId)
+        {
+            var student = _context.Students.Find(studentId);
+            if (student == null)
+                throw new KeyNotFoundException();
+
+            return new StudentDTO(student);
         }
 
         public FamilyMemberDTO[] GetFamilyMembersOfAStudent(int studentId)
