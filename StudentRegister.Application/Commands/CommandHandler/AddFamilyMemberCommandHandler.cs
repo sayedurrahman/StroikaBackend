@@ -4,17 +4,17 @@ using StudentRegister.Models.Commands;
 
 namespace StudentRegister.Application.Commands.CommandHandler
 {
-    public class AddStudentCommandHandler : ICommandHandler<AddStudentCommand>
+    public class AddFamilyMemberCommandHandler : ICommandHandler<AddFamilyMemberCommand>
     {
         public IStudentCommandRepository StudentCommandRepository { get; }
-        public AddStudentCommandHandler(IStudentCommandRepository studentCommandRepository)
+        public AddFamilyMemberCommandHandler(IStudentCommandRepository studentCommandRepository)
         {
             StudentCommandRepository = studentCommandRepository;
         }
 
-        public int Handle(AddStudentCommand command)
+        public int Handle(AddFamilyMemberCommand command)
         {
-            return StudentCommandRepository.AddStudent(command);
+            return StudentCommandRepository.AddFamilyMemberOfStudent(command);
         }
     }
 }

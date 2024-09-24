@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application.Commands.Interfaces;
+using StudentRegister.Application.Queries.Interfaces;
 using StudentRegister.Models.Commands;
-using StudentRegister.Models.Queries;
 using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Queries;
-using StudentRegister.Application.Queries.Interfaces;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StudentRegister.Controllers
 {
@@ -15,27 +12,28 @@ namespace StudentRegister.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly ICommandHandler<AddStudentCommand> addStudentCommandHandler;
+        private readonly ICommandHandler<UpdateStudentCommand> updateStudentCommandHandler;
+        private readonly ICommandHandler<UpdateStudentNationalityCommand> updateStudentNationalityCommandHandler;
+        private readonly ICommandHandler<AddFamilyMemberCommand> addFamilyMemberCommandHandler;
         private readonly IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler;
 
-        public StudentsController(IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler, ICommandHandler<AddStudentCommand> addStudentCommandHandler)
+        public StudentsController(ICommandHandler<AddStudentCommand> addStudentCommandHandler,
+                                   ICommandHandler<UpdateStudentCommand> updateStudentCommandHandler,
+                                   ICommandHandler<UpdateStudentNationalityCommand> updateStudentNationalityCommandHandler,
+                                   ICommandHandler<AddFamilyMemberCommand> addFamilyMemberCommandHandler, 
+                                   IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler)
         {
-            this.getAllStudentsQueryHandler = getAllStudentsQueryHandler;
             this.addStudentCommandHandler = addStudentCommandHandler;
+            this.updateStudentCommandHandler = updateStudentCommandHandler;
+            this.updateStudentNationalityCommandHandler = updateStudentNationalityCommandHandler;
+            this.addFamilyMemberCommandHandler = addFamilyMemberCommandHandler;
+            this.getAllStudentsQueryHandler = getAllStudentsQueryHandler;
         }
 
-        /// <summary>
-        /// GET: api/Students
-        /// </summary>
-        /// <returns>List of StudentDTO</returns>
-        [HttpGet]
-        public IEnumerable<StudentDTO> Get()
-        {
-            var query = new GetAllStudentsQuery();
-            return getAllStudentsQueryHandler.Handle(query);
-        }
+        #region == Command ==
 
         /// <summary>
-        /// POST api/Students
+        /// POST api/Students; Add new student
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
@@ -46,31 +44,81 @@ namespace StudentRegister.Controllers
         {
             var command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
             int studentId = addStudentCommandHandler.Handle(command);
-            return new StudentDTO { ID = studentId, FirstName = firstName, LastName = lastName, DateOfBirth = dob }; // No need to fetch data that are already available
+            return new StudentDTO { ID = studentId, FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            // No exception means data stored; So no need to fetch data that are already available
         }
 
-        // PUT api/Students/5
-        //TODO: check input
+        /// <summary>
+        /// PUT api/Students/{id}; Update student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="dob"></param>
+        /// <returns>Updated student</returns>
         [HttpPut("{id}")]
-        public StudentDTO Put(int id, [FromBody] string value)
+        public StudentDTO Put(int id, string firstName, string lastName, DateTime dob)
         {
-            return Get(0);
+            var command = new UpdateStudentCommand { Id = id, FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            int studentId = updateStudentCommandHandler.Handle(command);
+            return Get(studentId);
         }
 
+        /// <summary>
+        /// PUT api/Students/{studentId}/Nationality/{NationalityId}
+        /// Update student nationality
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="nid"></param>
+        /// <returns>Student with nationality</returns>
+        [HttpPut("{id}/Nationality/{nid}")]
+        public CitizenStudentDTO UpdateNationalityOfStudent(int id, int nid)
+        {
+            var command = new UpdateStudentNationalityCommand { StudentId = id, NationalityId = nid };
+            int studentId = updateStudentNationalityCommandHandler.Handle(command);
+            return GetCitizenStudent(id);
+        }
+        
+        /// <summary>
+        /// POST api/Students/5/FamilyMembers: Add family member
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="dob"></param>
+        /// <param name="relationshipId"></param>
+        /// <returns>Newly added family member</returns>
+        [HttpPost("{id}/FamilyMembers")]
+        public FamilyMemberDTO AddFamilyMemberOfStudent(int id, string firstName, string lastName, DateTime dob, int relationshipId)
+        {
+            var command = new AddFamilyMemberCommand { StudentId = id, FirstName = firstName, LastName = lastName, DateOfBirth = dob, RelationshipId = relationshipId };
+            int fmId = addFamilyMemberCommandHandler.Handle(command);
+
+            return new FamilyMemberDTO { ID = fmId, FirstName = firstName, LastName = lastName, DateOfBirth = dob, RelationshipId = relationshipId }; 
+            // No exception means data stored; So no need to fetch data that are already available
+        }
+
+        #endregion
+
+        #region == Query == 
+
+        /// <summary>
+        /// GET: api/Students; Get all students
+        /// </summary>
+        /// <returns>List of StudentDTO</returns>
+        [HttpGet]
+        public IEnumerable<StudentDTO> Get()
+        {
+            var query = new GetAllStudentsQuery();
+            return getAllStudentsQueryHandler.Handle(query);
+        }
+        
         // GET api/Students/5/Nationality
         [HttpGet("{id}/Nationality")]
         public CitizenStudentDTO GetCitizenStudent(int id)
         {
             return null;
             //return new() { ID = 1, FirstName = "John", LastName = "Doe", NationalityId = 1 };
-        }
-
-
-        // PUT api/<StudentsController>/5/Nationality/{3}
-        [HttpPut("{id}/Nationality/{nid}")]
-        public CitizenStudentDTO PutNationalityOfStudent(int id, int nid)
-        {
-            return GetCitizenStudent(0);
         }
 
         // GET api/Students/5/FamilyMembers
@@ -81,15 +129,6 @@ namespace StudentRegister.Controllers
             return null;
         }
 
-        // POST api/Students/5/FamilyMembers
-        //TODO: check input
-        [HttpPost("{id}/FamilyMembers")]
-        public FamilyMemberDTO AddFamilyMemberOfStudent([FromBody] string value)
-        {
-            //return new() { ID = 1, FirstName = "John", LastName = "Doe", RelationshipId = 1, DateOfBirth = DateTime.Now };
-            return null;
-        }
-
         // GET api/Students/5
         //[HttpGet("{id}")]
         private StudentDTO Get(int id)
@@ -97,5 +136,7 @@ namespace StudentRegister.Controllers
             return null;
             //return new() { ID = 1, FirstName = "John", LastName = "Doe", DateOfBirth = DateTime.Parse("2023-07-31T12:44:55.403Z") };
         }
+
+        #endregion
     }
 }

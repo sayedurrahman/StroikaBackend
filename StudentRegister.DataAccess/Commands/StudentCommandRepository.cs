@@ -1,6 +1,5 @@
 ﻿using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.Models.Commands;
-using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Entities;
 
 namespace StudentRegister.DataAccess.Commands
@@ -35,30 +34,43 @@ namespace StudentRegister.DataAccess.Commands
             return s.ID;
         }
 
-        public void AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)
+        /// <summary>
+        /// Add a new family member of a Student
+        /// </summary>
+        /// <param name="familyMember"></param>
+        /// <returns>Family member's Id</returns>
+        public int AddFamilyMemberOfStudent(AddFamilyMemberCommand familyMember)
         {
-            context.FamilyMembers.Add(new FamilyMember
+            var fM = new FamilyMember
             {
-                StudentID = studentId,
+                StudentID = familyMember.StudentId,
                 FirstName = familyMember.FirstName,
                 LastName = familyMember.LastName,
                 RelationshipId = familyMember.RelationshipId,
                 DateOfBirth = familyMember.DateOfBirth,
                 AddedOn = DateTime.Now,
                 UpdatedOn = DateTime.Now,
-            });
+            };
+            context.FamilyMembers.Add(fM);
             context.SaveChanges();
+            return fM.ID;
         }
 
-        public bool UpdateNationalityOfStudent(int studentId, int nationalityId)
+        /// <summary>
+        /// Update nationality of student
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Recently updated Student's id</returns>
+        /// <exception cref="KeyNotFoundException">If student cannot be found by the Id</exception>
+        public int UpdateNationalityOfStudent(UpdateStudentNationalityCommand command)
         {
-            var student = context.Students.Find(studentId);
+            var student = context.Students.Find(command.StudentId);
             if (student == null)
                 throw new KeyNotFoundException();
 
-            student.NationalityId = nationalityId;
+            student.NationalityId = command.NationalityId;
             context.SaveChanges();
-            return true;
+            return command.StudentId;
         }
 
         /// <summary>
