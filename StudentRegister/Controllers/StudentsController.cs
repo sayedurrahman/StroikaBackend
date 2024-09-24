@@ -37,13 +37,12 @@ namespace StudentRegister.Controllers
         }
 
         // POST api/Students
-        //TODO: check input
         [HttpPost]
         public StudentDTO Post(string firstName, string lastName, DateTime dob)
         {
-            AddStudentCommand command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
-            addStudentHandler.Handle(command);
-            return Get(0);
+            var command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            int studentId = addStudentHandler.Handle(command);
+            return new StudentDTO { ID = studentId, FirstName = firstName, LastName = lastName, DateOfBirth = dob };
         }
 
         // PUT api/Students/5

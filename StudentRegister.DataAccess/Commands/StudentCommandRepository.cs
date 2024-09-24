@@ -12,10 +12,10 @@ namespace StudentRegister.DataAccess.Commands
         {
             _context = context;
         }
-        
-        public void AddStudent(AddStudentCommand student)
+
+        public int AddStudent(AddStudentCommand student)
         {
-            _context.Students.Add(new Student
+            Student s = new Student
             {
                 FirstName = student.FirstName,
                 LastName = student.LastName,
@@ -23,8 +23,10 @@ namespace StudentRegister.DataAccess.Commands
                 AddedOn = DateTime.Now,
                 UpdatedOn = DateTime.Now,
                 FamilyMembers = new List<FamilyMember>()
-            });
+            };
+            _context.Students.Add(s);
             _context.SaveChanges();
+            return s.ID;
         }
 
         public void AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember)

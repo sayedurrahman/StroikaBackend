@@ -5,6 +5,10 @@ namespace StudentRegister.Models.DTOs
 {
     public class StudentDTO : Person
     {
+        public StudentDTO()
+        {
+            
+        }
         public StudentDTO(Student student)
         {
             ID = student.ID;

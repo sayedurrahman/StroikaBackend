@@ -5,7 +5,7 @@ namespace StudentRegister.DataAccess.Commands.Interfaces
 {
     public interface IStudentCommandRepository
     {
-        void AddStudent(AddStudentCommand student);
+        int AddStudent(AddStudentCommand student);
         void AddFamilyMemberOfStudent(int studentId, FamilyMemberDTO familyMember);
         bool UpdateStudent(int studentId, StudentDTO student);
         bool UpdateNationalityOfStudent(int studentId, int NationalityId);        

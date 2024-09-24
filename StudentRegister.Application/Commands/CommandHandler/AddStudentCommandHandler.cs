@@ -17,9 +17,9 @@ namespace StudentRegister.Application.Commands.CommandHandler
             StudentCommandRepository = studentCommandRepository;
         }
 
-        public void Handle(AddStudentCommand command)
+        public int Handle(AddStudentCommand command)
         {
-            StudentCommandRepository.AddStudent(command);
+            return StudentCommandRepository.AddStudent(command);
         }
     }
 }
