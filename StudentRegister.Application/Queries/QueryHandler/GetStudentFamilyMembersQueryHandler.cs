@@ -5,7 +5,7 @@ using StudentRegister.Models.Queries;
 
 namespace StudentRegister.Application.Queries.QueryHandler
 {
-    internal class GetStudentFamilyMembersQueryHandler : IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>
+    public class GetStudentFamilyMembersQueryHandler : IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>
     {
         private readonly IStudentQueryRepository studentQueryRepository;
 

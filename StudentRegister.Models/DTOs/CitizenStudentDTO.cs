@@ -5,6 +5,7 @@ namespace StudentRegister.Models.DTOs
 {
     public class CitizenStudentDTO : Citizen
     {
+        public CitizenStudentDTO() { }
         public CitizenStudentDTO(Student student)
         {
             ID = student.ID;

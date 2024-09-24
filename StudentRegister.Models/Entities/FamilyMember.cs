@@ -12,7 +12,7 @@
         public int StudentID { get; set; } 
         public Student Student { get; set; }
 
-        public int NationalityId { get; set; }
+        public int? NationalityId { get; set; }
         public Nationality Nationality { get; set; }
        
     }

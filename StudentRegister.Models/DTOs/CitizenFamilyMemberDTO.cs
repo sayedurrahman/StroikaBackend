@@ -12,7 +12,7 @@ namespace StudentRegister.Models.DTOs
             LastName = fm.LastName;
             DateOfBirth = fm.DateOfBirth;
             RelationshipId = fm.RelationshipId;
-            NationalityId = fm.NationalityId;
+            NationalityId = fm.NationalityId.HasValue ? fm.NationalityId.Value : 0;
         }
 
         public DateTime DateOfBirth { get; set; }

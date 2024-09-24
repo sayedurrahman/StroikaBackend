@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using StudentRegister.Application.Commands.CommandHandler;
+using StudentRegister.Application.Queries.QueryHandler;
 using StudentRegister.Application.Commands.Interfaces;
+using StudentRegister.Application.Queries.Interfaces;
 using StudentRegister.DataAccess.Commands;
 using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.DataAccess.Queries;
 using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.Commands;
+using StudentRegister.Models.DTOs;
+using StudentRegister.Models.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,10 +50,19 @@ app.Run();
 
 static void RegisterDependencies(WebApplicationBuilder builder) =>
     builder.Services
+           //.AddScoped<StudentDTO, StudentDTO>()
+           //.AddScoped<FamilyMemberDTO, FamilyMemberDTO>()
+           //.AddScoped<CitizenStudentDTO, CitizenStudentDTO>()
            .AddScoped<INationalityQueryRepository, NationalityQueryRepository>()
            .AddScoped<IStudentQueryRepository, StudentQueryRepository>()
            .AddScoped<IStudentCommandRepository, StudentCommandRepository>()
            .AddScoped<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
            .AddScoped<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
            .AddScoped<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>()
-           .AddScoped<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>();
+           .AddScoped<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>()
+           .AddScoped<ICommandHandler<UpdateStudentNationalityCommand>, UpdateStudentNationalityCommandHandler>()
+           .AddScoped<ICommandHandler<AddFamilyMemberCommand>, AddFamilyMemberCommandHandler>()
+           .AddScoped<IQueryHandler<GetAllStudentsQuery, StudentDTO[]>, GetAllStudentQueryHandler>()
+           .AddScoped<IQueryHandler<GetStudentQuery, StudentDTO>, GetStudentQueryHandler>()
+           .AddScoped<IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>, GetStudentFamilyMembersQueryHandler>()
+           .AddScoped<IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>, GetStudentWithNationalityQueryHandler>(); 

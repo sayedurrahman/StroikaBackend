@@ -5,7 +5,7 @@ using StudentRegister.Models.Queries;
 
 namespace StudentRegister.Application.Queries.QueryHandler
 {
-    internal class GetStudentWithNationalityQueryHandler : IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>
+    public class GetStudentWithNationalityQueryHandler : IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>
     {
         private readonly IStudentQueryRepository studentQueryRepository;
 
