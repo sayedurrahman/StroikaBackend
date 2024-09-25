@@ -12,9 +12,9 @@ namespace StudentRegister.DataAccess.Queries
             _studentRegisterContext = studentRegisterContext;
         }
 
-        public IEnumerable<NationalityDTO> GetAll()
+        public NationalityDTO[] GetAll()
         {
-            return _studentRegisterContext.Nationalities.Select(x => new NationalityDTO(x)).ToList();
+            return _studentRegisterContext.Nationalities.Select(x => new NationalityDTO(x)).ToArray();
         }
     }
 }

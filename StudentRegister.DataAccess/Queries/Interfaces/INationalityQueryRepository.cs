@@ -4,6 +4,6 @@ namespace StudentRegister.DataAccess.Queries.Interfaces
 {
     public interface INationalityQueryRepository
     {
-        IEnumerable<NationalityDTO> GetAll();
+        NationalityDTO[] GetAll();
     }
 }

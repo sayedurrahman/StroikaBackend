@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentRegister.Application;
 using StudentRegister.DataAccess.Queries;
 using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
@@ -11,18 +12,18 @@ namespace StudentRegister.Controllers
     [ApiController]
     public class NationalitiesController : ControllerBase
     {
-        public NationalitiesController(INationalityQueryRepository nationalityQueryRepository)
+        public NationalitiesController(INationalityServices nationalityServices)
         {
-            NationalityQueryRepository = nationalityQueryRepository;
+            this.nationalityServices = nationalityServices;
         }
 
-        public INationalityQueryRepository NationalityQueryRepository { get; }
+        public INationalityServices nationalityServices { get; }
 
         // GET: api/Nationalities
         [HttpGet]
         public IEnumerable<NationalityDTO> Get()
         {
-            return NationalityQueryRepository.GetAll();
+            return nationalityServices.GetAllNationalities(new());
         }
     }
 }

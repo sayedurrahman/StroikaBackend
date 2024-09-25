@@ -1,4 +1,4 @@
 ﻿namespace StudentRegister.Models.Queries
 {
-    public class GetAllStudentsQuery { }
+    public class GetAllNationalitiesQuery { }
 }
