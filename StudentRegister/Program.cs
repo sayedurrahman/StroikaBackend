@@ -51,17 +51,28 @@ app.Run();
 
 static void RegisterDependencies(WebApplicationBuilder builder) =>
     builder.Services
-           .AddTransient<INationalityQueryRepository, NationalityQueryRepository>()
+           // Students
            .AddTransient<IStudentQueryRepository, StudentQueryRepository>()
            .AddTransient<IStudentCommandRepository, StudentCommandRepository>()
-           .AddTransient<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
-           .AddTransient<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
            .AddTransient<ICommandHandler<AddStudentCommand>, AddStudentCommandHandler>()
            .AddTransient<ICommandHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>()
            .AddTransient<ICommandHandler<UpdateStudentNationalityCommand>, UpdateStudentNationalityCommandHandler>()
-           .AddTransient<ICommandHandler<AddFamilyMemberCommand>, AddFamilyMemberCommandHandler>()
            .AddTransient<IQueryHandler<GetAllStudentsQuery, StudentDTO[]>, GetAllStudentQueryHandler>()
            .AddTransient<IQueryHandler<GetStudentQuery, StudentDTO>, GetStudentQueryHandler>()
            .AddTransient<IQueryHandler<GetStudentFamilyMembersQuery, FamilyMemberDTO[]>, GetStudentFamilyMembersQueryHandler>()
            .AddTransient<IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO>, GetStudentWithNationalityQueryHandler>()
-           .AddTransient<IStudentServices, StudentServices>();
+           .AddTransient<IStudentServices, StudentServices>()
+           // Family Members
+           .AddTransient<IFamilyMemberQueryRepository, FamilyMemberQueryRepository>()
+           .AddTransient<IFamilyMemberCommandRepository, FamilyMemberCommandRepository>()
+           .AddTransient<ICommandHandler<AddFamilyMemberCommand>, AddFamilyMemberCommandHandler>()
+           .AddTransient<ICommandHandler<UpdateFamilyMemberCommand>, UpdateFamilyMemberCommandHandler>()
+           .AddTransient<ICommandHandler<UpdateFamilyMemberNationalityCommand>, UpdateFamilyMemberNationalityCommandHandler>()
+           .AddTransient<ICommandHandler<DeleteFamilyMemberCommand>, DeleteFamilyMemberCommandHandler>()
+           .AddTransient<IQueryHandler<GetFamilyMemberWithNationalityQuery, CitizenFamilyMemberDTO>, GetFamilyMemberWithNationalityQueryHandler>()
+           .AddTransient<IQueryHandler<GetFamilyMemberQuery, FamilyMemberDTO>, GetFamilyMemberQueryHandler>()
+           .AddTransient<IFamilyMemberService, FamilyMemberService>()
+           // Nationality
+           .AddTransient<INationalityQueryRepository, NationalityQueryRepository>()
+           .AddTransient<IQueryHandler<GetAllNationalitiesQuery, NationalityDTO[]>, GetAllNationalitiesQueryHandler>()
+           .AddTransient<INationalityServices, NationalityServices>();
