@@ -6,15 +6,15 @@ namespace StudentRegister.Application.Commands.CommandHandler
 {
     public class AddFamilyMemberCommandHandler : ICommandHandler<AddFamilyMemberCommand>
     {
-        public IStudentCommandRepository StudentCommandRepository { get; }
-        public AddFamilyMemberCommandHandler(IStudentCommandRepository studentCommandRepository)
+        public IFamilyMemberCommandRepository familyMemberCommandRepository { get; }
+        public AddFamilyMemberCommandHandler(IFamilyMemberCommandRepository familyMemberCommandRepository)
         {
-            StudentCommandRepository = studentCommandRepository;
+            this.familyMemberCommandRepository = familyMemberCommandRepository;
         }
 
         public int Handle(AddFamilyMemberCommand command)
         {
-            return StudentCommandRepository.AddFamilyMemberOfStudent(command);
+            return familyMemberCommandRepository.AddFamilyMemberOfStudent(command);
         }
     }
 }

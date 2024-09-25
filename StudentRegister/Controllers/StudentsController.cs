@@ -11,10 +11,12 @@ namespace StudentRegister.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentServices studentServices;
+        private readonly IFamilyMemberService familyMemberService;
 
-        public StudentsController(IStudentServices studentServices)
+        public StudentsController(IStudentServices studentServices, IFamilyMemberService familyMemberService)
         {
             this.studentServices = studentServices;
+            this.familyMemberService = familyMemberService;
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace StudentRegister.Controllers
         public FamilyMemberDTO AddFamilyMemberOfStudent(int id, string firstName, string lastName, DateTime dob, int relationshipId)
         {
             var command = new AddFamilyMemberCommand { StudentId = id, FirstName = firstName, LastName = lastName, DateOfBirth = dob, RelationshipId = relationshipId };
-            return studentServices.AddStudentFamilyMember(command);
+            return familyMemberService.AddStudentFamilyMember(command);
         }
 
         /// <summary>

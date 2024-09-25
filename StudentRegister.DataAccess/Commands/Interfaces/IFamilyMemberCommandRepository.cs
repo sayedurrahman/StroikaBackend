@@ -1,11 +1,13 @@
-﻿using StudentRegister.Models.DTOs;
+﻿using StudentRegister.Models.Commands;
+using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.DataAccess.Commands.Interfaces
 {
     public interface IFamilyMemberCommandRepository
     {
-        bool UpdateFamilyMember(int familyMemberId, FamilyMemberDTO member);
-        void DeleteFamilyMember(int familyMemberId);
-        bool UpdateNationalityOfAFamilyMember(int familyMemberId, int newNationalityId);
+        int AddFamilyMemberOfStudent(AddFamilyMemberCommand familyMember);
+        int UpdateFamilyMember(UpdateFamilyMemberCommand command);
+        void DeleteFamilyMember(DeleteFamilyMemberCommand command);
+        int UpdateNationalityOfAFamilyMember(UpdateFamilyMemberNationalityCommand command);
     }
 }

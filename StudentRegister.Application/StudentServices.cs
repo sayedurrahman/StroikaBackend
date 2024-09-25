@@ -11,7 +11,6 @@ namespace StudentRegister.Application
         private readonly ICommandHandler<AddStudentCommand> addStudentCommandHandler;
         private readonly ICommandHandler<UpdateStudentCommand> updateStudentCommandHandler;
         private readonly ICommandHandler<UpdateStudentNationalityCommand> updateStudentNationalityCommandHandler;
-        private readonly ICommandHandler<AddFamilyMemberCommand> addFamilyMemberCommandHandler;
         private readonly IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler;
         private readonly IQueryHandler<GetStudentQuery, StudentDTO> getStudentQueryHandler;
         private readonly IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO> getStudentWithNationalityQueryHandler;
@@ -20,7 +19,6 @@ namespace StudentRegister.Application
         public StudentServices(ICommandHandler<AddStudentCommand> addStudentCommandHandler,
                                ICommandHandler<UpdateStudentCommand> updateStudentCommandHandler,
                                ICommandHandler<UpdateStudentNationalityCommand> updateStudentNationalityCommandHandler,
-                               ICommandHandler<AddFamilyMemberCommand> addFamilyMemberCommandHandler,
                                IQueryHandler<GetAllStudentsQuery, StudentDTO[]> getAllStudentsQueryHandler,
                                IQueryHandler<GetStudentQuery, StudentDTO> getStudentQueryHandler,
                                IQueryHandler<GetStudentWithNationalityQuery, CitizenStudentDTO> getStudentWithNationalityQueryHandler,
@@ -29,7 +27,6 @@ namespace StudentRegister.Application
             this.addStudentCommandHandler = addStudentCommandHandler;
             this.updateStudentCommandHandler = updateStudentCommandHandler;
             this.updateStudentNationalityCommandHandler = updateStudentNationalityCommandHandler;
-            this.addFamilyMemberCommandHandler = addFamilyMemberCommandHandler;
             this.getAllStudentsQueryHandler = getAllStudentsQueryHandler;
             this.getStudentQueryHandler = getStudentQueryHandler;
             this.getStudentWithNationalityQueryHandler = getStudentWithNationalityQueryHandler;
@@ -54,12 +51,6 @@ namespace StudentRegister.Application
         {
             int studentId = updateStudentNationalityCommandHandler.Handle(command);
             return getStudentWithNationalityQueryHandler.Handle(new() { StudentId = studentId });
-        }
-
-        public FamilyMemberDTO AddStudentFamilyMember(AddFamilyMemberCommand command)
-        {
-            //int fmId = addFamilyMemberCommandHandler.Handle(command);
-            return null;
         }
 
         #endregion

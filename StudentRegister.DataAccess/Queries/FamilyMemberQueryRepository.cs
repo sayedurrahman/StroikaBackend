@@ -1,5 +1,6 @@
 ﻿using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
+using StudentRegister.Models.Queries;
 
 namespace StudentRegister.DataAccess.Queries
 {
@@ -11,18 +12,18 @@ namespace StudentRegister.DataAccess.Queries
             _context = context;
         }
                 
-        public FamilyMemberDTO GetFamilyMember(int id)
+        public FamilyMemberDTO GetFamilyMember(GetFamilyMemberQuery query)
         {
-            var fm = _context.FamilyMembers.Find(id);
+            var fm = _context.FamilyMembers.Find(query.Id);
             if (fm == null)
                 throw new KeyNotFoundException();
 
             return new FamilyMemberDTO(fm);
         }
 
-        public CitizenFamilyMemberDTO GetFamilyMemberWithNationality(int id)
+        public CitizenFamilyMemberDTO GetFamilyMemberWithNationality(GetFamilyMemberWithNationalityQuery query)
         {
-            var fm = _context.FamilyMembers.Find(id);
+            var fm = _context.FamilyMembers.Find(query.Id);
             if (fm == null)
                 throw new KeyNotFoundException();
 

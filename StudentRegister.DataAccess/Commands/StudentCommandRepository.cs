@@ -34,28 +34,7 @@ namespace StudentRegister.DataAccess.Commands
             return s.ID;
         }
 
-        /// <summary>
-        /// Add a new family member of a Student
-        /// </summary>
-        /// <param name="familyMember"></param>
-        /// <returns>Family member's Id</returns>
-        public int AddFamilyMemberOfStudent(AddFamilyMemberCommand familyMember)
-        {
-            var fM = new FamilyMember
-            {
-                StudentID = familyMember.StudentId,
-                FirstName = familyMember.FirstName,
-                LastName = familyMember.LastName,
-                RelationshipId = familyMember.RelationshipId,
-                DateOfBirth = familyMember.DateOfBirth,
-                AddedOn = DateTime.Now,
-                UpdatedOn = DateTime.Now,
-            };
-            context.FamilyMembers.Add(fM);
-            context.SaveChanges();
-            return fM.ID;
-        }
-
+        
         /// <summary>
         /// Update nationality of student
         /// </summary>
