@@ -1,5 +1,4 @@
 ﻿using StudentRegister.Models.Commands;
-using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.DataAccess.Commands.Interfaces
 {

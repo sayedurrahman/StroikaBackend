@@ -1,6 +1,5 @@
 ﻿using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.DTOs;
-using System.Security.Cryptography.X509Certificates;
 
 namespace StudentRegister.DataAccess.Queries
 {

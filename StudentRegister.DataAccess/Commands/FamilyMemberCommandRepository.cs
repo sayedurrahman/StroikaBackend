@@ -1,6 +1,5 @@
 ﻿using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.Models.Commands;
-using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Entities;
 
 namespace StudentRegister.DataAccess.Commands

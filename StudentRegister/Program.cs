@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using StudentRegister.Application;
 using StudentRegister.Application.Commands.CommandHandler;
-using StudentRegister.Application.Queries.QueryHandler;
 using StudentRegister.Application.Commands.Interfaces;
 using StudentRegister.Application.Queries.Interfaces;
+using StudentRegister.Application.Queries.QueryHandler;
 using StudentRegister.DataAccess.Commands;
 using StudentRegister.DataAccess.Commands.Interfaces;
 using StudentRegister.DataAccess.Queries;
@@ -10,7 +11,6 @@ using StudentRegister.DataAccess.Queries.Interfaces;
 using StudentRegister.Models.Commands;
 using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Queries;
-using StudentRegister.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
