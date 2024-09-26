@@ -61,7 +61,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetAStudent_ShouldReturnStudent_WhenStudentExists()
+        public void GetAStudent_InputStudentId_ShouldReturnStudent_WhenStudentExists()
         {
             // Act
             var result = _repository.GetAStudent(1);
@@ -73,14 +73,14 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetAStudent_ShouldThrowException_WhenStudentDoesNotExist()
+        public void GetAStudent_InputNonExistentStudentId_ShouldThrowException_WhenStudentDoesNotExist()
         {
             // Act & Assert
             Assert.Throws<KeyNotFoundException>(() => _repository.GetAStudent(999));
         }
 
         [Fact]
-        public void GetFamilyMembersOfAStudent_ShouldReturnFamilyMembers_WhenStudentExists()
+        public void GetFamilyMembersOfAStudent_InputStudentId_ShouldReturnFamilyMembers_WhenStudentExists()
         {
             // Act
             var result = _repository.GetFamilyMembersOfAStudent(TestData.Student1.Id);
@@ -92,7 +92,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetFamilyMembersOfAStudent_ShouldReturnEmptyArray_WhenNoFamilyMembersExist()
+        public void GetFamilyMembersOfAStudent_InputNonExistentStudentId_ShouldReturnEmptyArray_WhenNoFamilyMembersExist()
         {
             // Act
             var result = _repository.GetFamilyMembersOfAStudent(999);
@@ -102,7 +102,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetStudentWithNationality_ShouldReturnStudentWithNationality_WhenStudentExists()
+        public void GetStudentWithNationality_InputStudentId_ShouldReturnStudentWithNationality_WhenStudentExists()
         {
             // Act
             var result = _repository.GetStudentWithNationality(TestData.Student1.Id);
@@ -115,7 +115,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetStudentWithNationality_ShouldThrowException_WhenStudentDoesNotExist()
+        public void GetStudentWithNationality_InputNonExistentStudentId_ShouldThrowException_WhenStudentDoesNotExist()
         {
             // Act & Assert
             Assert.Throws<KeyNotFoundException>(() => _repository.GetStudentWithNationality(999));

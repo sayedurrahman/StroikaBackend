@@ -35,7 +35,7 @@ namespace StudentRegister.DataAccess.Test
 
 
         [Fact]
-        public void GetFamilyMember_ShouldReturnFamilyMemberDTO_WhenFamilyMemberExists()
+        public void GetFamilyMember_InputFMId_ShouldReturnFamilyMemberDTO_WhenFamilyMemberExists()
         {
             // Arrange
             var query = new GetFamilyMemberQuery { Id = TestData.FamilyMember1.Id };
@@ -52,7 +52,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetFamilyMember_ShouldThrowKeyNotFoundException_WhenFamilyMemberDoesNotExist()
+        public void GetFamilyMember_InputNonExistentFMID_ShouldThrowKeyNotFoundException_WhenFamilyMemberDoesNotExist()
         {
             // Arrange
             var query = new GetFamilyMemberQuery { Id = 999 };
@@ -62,7 +62,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetFamilyMemberWithNationality_ShouldReturnCitizenFamilyMemberDTO_WhenFamilyMemberExists()
+        public void GetFamilyMemberWithNationality_InputFMId_ShouldReturnCitizenFamilyMemberDTO_WhenFamilyMemberExists()
         {
             // Arrange
 
@@ -81,7 +81,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetFamilyMemberWithNationality_ShouldReturnCitizenFamilyMemberDTOAndZeroNationality_WhenFamilyMemberExistsButNationalityNot()
+        public void GetFamilyMemberWithNationality_InputFMId_ShouldReturnCitizenFamilyMemberDTOAndZeroNationality_WhenFamilyMemberExistsButNationalityNot()
         {
             // Arrange
 
@@ -100,7 +100,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void GetFamilyMemberWithNationality_ShouldThrowKeyNotFoundException_WhenFamilyMemberDoesNotExist()
+        public void GetFamilyMemberWithNationality_InputNonExistentFMID_ShouldThrowKeyNotFoundException_WhenFamilyMemberDoesNotExist()
         {
             // Arrange
             var query = new GetFamilyMemberWithNationalityQuery { Id = 999 };

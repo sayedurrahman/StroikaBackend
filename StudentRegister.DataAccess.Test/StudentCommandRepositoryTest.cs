@@ -51,7 +51,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateNationalityOfStudent_ShouldUpdateNationality_WhenStudentExists()
+        public void UpdateNationalityOfStudent_InputStudentIdAndNewNationalityId_ShouldUpdateNationality_WhenStudentExists()
         {
             // Arrange
             var command = new UpdateStudentNationalityCommand
@@ -70,7 +70,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateNationalityOfStudent_ShouldThrowException_WhenStudentDoesNotExist()
+        public void UpdateNationalityOfStudent_InputNonExistentStudentId_ShouldThrowException_WhenStudentDoesNotExist()
         {
             // Arrange
             var command = new UpdateStudentNationalityCommand
@@ -84,7 +84,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateStudent_ShouldUpdateStudentDetails_WhenStudentExists()
+        public void UpdateStudent_InputStudentInfo_ShouldUpdateStudentDetails_WhenStudentExists()
         {
             // Arrange
             var command = new UpdateStudentCommand
@@ -107,7 +107,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateStudent_ShouldThrowException_WhenStudentDoesNotExist()
+        public void UpdateStudent_InputNonExistentStudentId_ShouldThrowException_WhenStudentDoesNotExist()
         {
             // Arrange
             var command = new UpdateStudentCommand

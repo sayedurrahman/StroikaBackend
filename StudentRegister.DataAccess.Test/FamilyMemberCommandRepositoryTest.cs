@@ -36,7 +36,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void AddFamilyMemberOfStudent_ShouldAddFamilyMemberSuccessfully()
+        public void AddFamilyMemberOfStudent_InputFamilyMemberInfo_ShouldAddFamilyMemberSuccessfully()
         {
             // Arrange
             var command = new AddFamilyMemberCommand
@@ -61,7 +61,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void DeleteFamilyMember_ShouldRemoveFamilyMember_WhenFamilyMemberExists()
+        public void DeleteFamilyMember_InputFamilyMemberId_ShouldRemoveFamilyMember_WhenFamilyMemberExists()
         {
             // Arrange
             var command = new DeleteFamilyMemberCommand { FamilyMemberId = 1 };
@@ -75,7 +75,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateFamilyMember_ShouldUpdateFamilyMemberDetails_WhenFamilyMemberExists()
+        public void UpdateFamilyMember_InputFamilyMemberInfo_ShouldUpdateFamilyMemberDetails_WhenFamilyMemberExists()
         {
             // Arrange
             var command = new UpdateFamilyMemberCommand
@@ -100,7 +100,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateFamilyMember_ShouldReturnZero_WhenFamilyMemberDoesNotExist()
+        public void UpdateFamilyMember_InputNonExistentFMID_ShouldReturnZero_WhenFamilyMemberDoesNotExist()
         {
             // Arrange
             var command = new UpdateFamilyMemberCommand
@@ -120,7 +120,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateNationalityOfAFamilyMember_ShouldUpdateNationality_WhenFamilyMemberExists()
+        public void UpdateNationalityOfAFamilyMember_InputFMIdNewNationalityId_ShouldUpdateNationality_WhenFamilyMemberExists()
         {
             // Arrange
             var command = new UpdateFamilyMemberNationalityCommand
@@ -139,7 +139,7 @@ namespace StudentRegister.DataAccess.Test
         }
 
         [Fact]
-        public void UpdateNationalityOfAFamilyMember_ShouldReturnZero_WhenFamilyMemberDoesNotExist()
+        public void UpdateNationalityOfAFamilyMember_InputNonExistentFMID_ShouldReturnZero_WhenFamilyMemberDoesNotExist()
         {
             // Arrange
             var command = new UpdateFamilyMemberNationalityCommand
