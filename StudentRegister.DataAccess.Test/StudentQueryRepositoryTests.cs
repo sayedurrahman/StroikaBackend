@@ -33,7 +33,8 @@ namespace StudentRegister.DataAccess.Test
             var familyMembers = new List<FamilyMember>
             {
                 new FamilyMember { ID = TestData.FamilyMember1.Id, StudentID = TestData.FamilyMember1.StudentID,  FirstName = TestData.FamilyMember1.FirstName, LastName = TestData.FamilyMember1.LastName, RelationshipId = TestData.FamilyMember1.RelationId, NationalityId = TestData.FamilyMember1.NationalityId },
-                new FamilyMember { ID = TestData.FamilyMember2.Id, StudentID = TestData.FamilyMember2.StudentID,  FirstName = TestData.FamilyMember2.FirstName, LastName = TestData.FamilyMember2.LastName, RelationshipId = TestData.FamilyMember2.RelationId}
+                new FamilyMember { ID = TestData.FamilyMember2.Id, StudentID = TestData.FamilyMember2.StudentID,  FirstName = TestData.FamilyMember2.FirstName, LastName = TestData.FamilyMember2.LastName, RelationshipId = TestData.FamilyMember2.RelationId},
+                new FamilyMember { ID = TestData.FamilyMember11.Id, StudentID = TestData.FamilyMember11.StudentID,  FirstName = TestData.FamilyMember11.FirstName, LastName = TestData.FamilyMember11.LastName, RelationshipId = TestData.FamilyMember11.RelationId, NationalityId = TestData.FamilyMember11.NationalityId },
              };
 
             _context.Students.AddRange(students);
@@ -85,8 +86,9 @@ namespace StudentRegister.DataAccess.Test
             var result = _repository.GetFamilyMembersOfAStudent(TestData.Student1.Id);
 
             // Assert
-            Assert.Equal(1, result.Length);
+            Assert.Equal(2, result.Length);
             Assert.Contains(result, fm => fm.FirstName == TestData.FamilyMember1.FirstName);
+            Assert.Contains(result, fm => fm.FirstName == TestData.FamilyMember11.FirstName);
         }
 
         [Fact]
