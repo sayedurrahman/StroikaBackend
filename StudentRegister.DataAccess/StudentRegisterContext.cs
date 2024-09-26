@@ -17,10 +17,10 @@ namespace StudentRegister.DataAccess
             modelBuilder.Entity<Student>().HasOne(s => s.Nationality).WithOne().HasForeignKey<Student>(s => s.NationalityId).IsRequired(false);
             modelBuilder.Entity<FamilyMember>().HasOne(x => x.Student).WithMany(x => x.FamilyMembers).HasForeignKey(x => x.StudentID).OnDelete(DeleteBehavior.Restrict);
 
-            InitianDataSeeding(modelBuilder);
+            InitialDataSeeding(modelBuilder);
         }
 
-        private static void InitianDataSeeding(ModelBuilder modelBuilder)
+        private static void InitialDataSeeding(ModelBuilder modelBuilder)
         {
             List<Nationality> nationalities = new List<Nationality>
             {

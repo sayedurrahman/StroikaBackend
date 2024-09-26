@@ -15,9 +15,7 @@ using StudentRegister.Models.Queries;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StudentRegister.DataAccess.StudentRegisterContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StudentRegisterConnection")));
@@ -32,8 +30,6 @@ using (var scope = app.Services.CreateScope())
     // Delete and recreate the database on each startup
     dbContext.Database.EnsureDeleted();
     dbContext.Database.EnsureCreated();
-    // TODO: Keep or remove
-    //CFStoredProcedure.CreateSP(dbContext);
 }
 
 // Configure the HTTP request pipeline.

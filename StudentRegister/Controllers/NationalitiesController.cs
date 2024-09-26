@@ -2,8 +2,6 @@
 using StudentRegister.Application;
 using StudentRegister.Models.DTOs;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace StudentRegister.Controllers
 {
     [Route("api/[controller]")]
@@ -17,7 +15,11 @@ namespace StudentRegister.Controllers
 
         public INationalityServices nationalityServices { get; }
 
-        // GET: api/Nationalities
+        /// <summary>
+        /// GET: api/Nationalities
+        /// Get all nationalities
+        /// </summary>
+        /// <returns>List of NationalityDTO</returns>
         [HttpGet]
         public IEnumerable<NationalityDTO> Get()
         {

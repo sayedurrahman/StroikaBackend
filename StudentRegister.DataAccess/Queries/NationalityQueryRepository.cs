@@ -12,6 +12,10 @@ namespace StudentRegister.DataAccess.Queries
             _studentRegisterContext = studentRegisterContext;
         }
 
+        /// <summary>
+        /// Get all nationalities
+        /// </summary>
+        /// <returns>Array of nationalities</returns>
         public NationalityDTO[] GetAll()
         {
             return _studentRegisterContext.Nationalities.Select(x => new NationalityDTO(x)).ToArray();

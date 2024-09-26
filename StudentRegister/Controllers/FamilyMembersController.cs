@@ -3,8 +3,6 @@ using StudentRegister.Application;
 using StudentRegister.Models.Commands;
 using StudentRegister.Models.DTOs;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace StudentRegister.Controllers
 {
     [Route("api/[controller]")]
@@ -18,9 +16,17 @@ namespace StudentRegister.Controllers
             this.familyMemberService = familyMemberService;
         }
 
-        // PUT api/FamilyMembers/5
+        /// <summary>
+        /// PUT api/FamilyMembers/{id}
+        /// Update a family member
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="dob"></param>
+        /// <param name="relationId"></param>
+        /// <returns>Updated family member</returns>
         [HttpPut("{id}")]
-        //TODO: check input
         public FamilyMemberDTO Put(int id, string firstName, string lastName, DateTime dob, int relationId)
         {
             UpdateFamilyMemberCommand command = new UpdateFamilyMemberCommand()
@@ -34,23 +40,37 @@ namespace StudentRegister.Controllers
             return familyMemberService.UpdateFamilyMember(command);
         }
 
-        // DELETE api/FamilyMembers/5
+        /// <summary>
+        /// DELETE api/FamilyMembers/{id}
+        /// Delete a family member by id
+        /// </summary>
+        /// <param name="id">Family member's id</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             familyMemberService.DeleteFamilyMember(new() { FamilyMemberId = id });
         }
 
-        // GET api/FamilyMembers/5/Nationality
+        /// <summary>
+        /// GET api/FamilyMembers/{id}/Nationality
+        /// Get family member's nationality
+        /// </summary>
+        /// <param name="id">Family member's id</param>
+        /// <returns>Family member with nationality</returns>
         [HttpGet("{id}/Nationality")]
         public CitizenFamilyMemberDTO GetFamilyMemberNationality(int id)
         {
             return familyMemberService.GetFamilyMemberWithNationality(new() { Id = id });
         }
 
-        // PUT api/FamilyMembers/5/Nationality/{nId}
+        /// <summary>
+        /// PUT api/FamilyMembers/{id}/Nationality/{nId}
+        /// Update family member's nationality
+        /// </summary>
+        /// <param name="id">Family member's id</param>
+        /// <param name="nID">New nationality id</param>
+        /// <returns>Family member with nationality</returns>
         [HttpPut("{id}/Nationality/{nID}")]
-        //TODO: check input
         public CitizenFamilyMemberDTO PutFamilyMemberNationality(int id, int nID)
         {
             return familyMemberService.UpdateFamilyMemberNationality(new() { FamilyMemberId = id, NewNationalityId = nID });

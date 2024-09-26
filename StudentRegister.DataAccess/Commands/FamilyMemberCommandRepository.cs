@@ -34,7 +34,10 @@ namespace StudentRegister.DataAccess.Commands
             return fM.ID;
         }
 
-
+        /// <summary>
+        /// Delete a family member
+        /// </summary>
+        /// <param name="command"></param>
         public void DeleteFamilyMember(DeleteFamilyMemberCommand command)
         {
             var fm = _context.FamilyMembers.Find(command.FamilyMemberId);
@@ -44,6 +47,11 @@ namespace StudentRegister.DataAccess.Commands
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Update a family member
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Family member's Id</returns>
         public int UpdateFamilyMember(UpdateFamilyMemberCommand command)
         {
             var fm = _context.FamilyMembers.Find(command.Id);
@@ -60,6 +68,11 @@ namespace StudentRegister.DataAccess.Commands
             return 0;
         }
 
+        /// <summary>
+        /// Update nationality of a family member
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Family member's Id</returns>
         public int UpdateNationalityOfAFamilyMember(UpdateFamilyMemberNationalityCommand command)
         {
             var fm = _context.FamilyMembers.Find(command.FamilyMemberId);

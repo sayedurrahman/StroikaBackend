@@ -52,7 +52,7 @@ namespace StudentRegister.Controllers
 
         /// <summary>
         /// PUT api/Students/{studentId}/Nationality/{NationalityId}
-        /// Update student nationality
+        /// Update student's nationality
         /// </summary>
         /// <param name="id">studentId</param>
         /// <param name="nid">NationalityId</param>

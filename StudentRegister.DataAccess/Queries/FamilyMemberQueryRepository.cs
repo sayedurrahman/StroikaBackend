@@ -11,7 +11,13 @@ namespace StudentRegister.DataAccess.Queries
         {
             _context = context;
         }
-                
+
+        /// <summary>
+        /// Get family member by id
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>Family member</returns>
+        /// <exception cref="KeyNotFoundException">If family member cannot be found by the Id</exception>
         public FamilyMemberDTO GetFamilyMember(GetFamilyMemberQuery query)
         {
             var fm = _context.FamilyMembers.Find(query.Id);
@@ -21,6 +27,12 @@ namespace StudentRegister.DataAccess.Queries
             return new FamilyMemberDTO(fm);
         }
 
+        /// <summary>
+        /// Get family member with nationality
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>Family member with nationality</returns>
+        /// <exception cref="KeyNotFoundException">If family member cannot be found by the Id</exception>
         public CitizenFamilyMemberDTO GetFamilyMemberWithNationality(GetFamilyMemberWithNationalityQuery query)
         {
             var fm = _context.FamilyMembers.Find(query.Id);
