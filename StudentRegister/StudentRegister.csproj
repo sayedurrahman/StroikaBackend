@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentRegister.Application\StudentRegister.Application.csproj" />
+    <ProjectReference Include="..\studentregister.client\studentregister.client.esproj" />
     <ProjectReference Include="..\StudentRegister.DataAccess\StudentRegister.DataAccess.csproj" />
     <ProjectReference Include="..\StudentRegister.Models\StudentRegister.Models.csproj" />
   </ItemGroup>
