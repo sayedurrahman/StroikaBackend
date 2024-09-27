@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application;
 using StudentRegister.Models.Commands;
-using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.Controllers
 {

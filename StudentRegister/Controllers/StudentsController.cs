@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application;
 using StudentRegister.Models.Commands;
-using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Queries;
 
 namespace StudentRegister.Controllers
