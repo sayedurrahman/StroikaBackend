@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application;
-using StudentRegister.Models.DTOs;
 
 namespace StudentRegister.Controllers
 {
@@ -19,11 +18,11 @@ namespace StudentRegister.Controllers
         /// GET: api/Nationalities
         /// Get all nationalities
         /// </summary>
-        /// <returns>List of NationalityDTO</returns>
+        /// <returns>Json: List of NationalityDTO</returns>
         [HttpGet]
-        public IEnumerable<NationalityDTO> Get()
+        public IActionResult Get()
         {
-            return nationalityServices.GetAllNationalities(new());
+            return Ok(nationalityServices.GetAllNationalities(new()));
         }
     }
 }

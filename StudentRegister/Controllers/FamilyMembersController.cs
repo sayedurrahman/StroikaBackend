@@ -25,9 +25,9 @@ namespace StudentRegister.Controllers
         /// <param name="lastName"></param>
         /// <param name="dob"></param>
         /// <param name="relationId"></param>
-        /// <returns>Updated family member</returns>
+        /// <returns>Json: Updated family member</returns>
         [HttpPut("{id}")]
-        public FamilyMemberDTO Put(int id, string firstName, string lastName, DateTime dob, int relationId)
+        public IActionResult Put(int id, string firstName, string lastName, DateTime dob, int relationId)
         {
             UpdateFamilyMemberCommand command = new UpdateFamilyMemberCommand()
             {
@@ -37,14 +37,14 @@ namespace StudentRegister.Controllers
                 DateOfBirth = dob,
                 RelationshipId = relationId
             };
-            return familyMemberService.UpdateFamilyMember(command);
+            return Ok(familyMemberService.UpdateFamilyMember(command));
         }
 
         /// <summary>
         /// DELETE api/FamilyMembers/{id}
         /// Delete a family member by id
         /// </summary>
-        /// <param name="id">Family member's id</param>
+        /// <param name="id">Json: Family member's id</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
@@ -56,11 +56,11 @@ namespace StudentRegister.Controllers
         /// Get family member's nationality
         /// </summary>
         /// <param name="id">Family member's id</param>
-        /// <returns>Family member with nationality</returns>
+        /// <returns>Json: Family member with nationality</returns>
         [HttpGet("{id}/Nationality")]
-        public CitizenFamilyMemberDTO GetFamilyMemberNationality(int id)
+        public IActionResult GetFamilyMemberNationality(int id)
         {
-            return familyMemberService.GetFamilyMemberWithNationality(new() { Id = id });
+            return Ok(familyMemberService.GetFamilyMemberWithNationality(new() { Id = id }));
         }
 
         /// <summary>
@@ -69,11 +69,11 @@ namespace StudentRegister.Controllers
         /// </summary>
         /// <param name="id">Family member's id</param>
         /// <param name="nID">New nationality id</param>
-        /// <returns>Family member with nationality</returns>
+        /// <returns>Json: Family member with nationality</returns>
         [HttpPut("{id}/Nationality/{nID}")]
-        public CitizenFamilyMemberDTO PutFamilyMemberNationality(int id, int nID)
+        public IActionResult PutFamilyMemberNationality(int id, int nID)
         {
-            return familyMemberService.UpdateFamilyMemberNationality(new() { FamilyMemberId = id, NewNationalityId = nID });
+            return Ok(familyMemberService.UpdateFamilyMemberNationality(new() { FamilyMemberId = id, NewNationalityId = nID }));
         }
     }
 }
