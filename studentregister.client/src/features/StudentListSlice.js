@@ -19,7 +19,11 @@ export const fetchStudents = createAsyncThunk('students/fetchStudents', async ()
 const studentSlice = createSlice({
     name: "students",
     initialState,
-    reducers: {},
+    reducers: {
+        refreshStudent: (state) => {
+            state.status = 'idle'
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchStudents.pending, (state) => {
@@ -35,5 +39,7 @@ const studentSlice = createSlice({
             });
     }
 });
+
+export const { refreshStudent } = studentSlice.actions
 
 export default studentSlice.reducer;

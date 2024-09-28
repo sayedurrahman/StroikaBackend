@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-const StudentForm = (studentData) => {
+const StudentForm = (props) => {
+    const nationalities = useSelector((state) => state.nationalities.nationalities);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dateOfBirth, setDob] = useState(new Date());
-
+    const [nationalityId, setNationalityId] = useState(0);
+    const dispatch = useDispatch();
+    const student = props.studentData;
     //const role = useSelector((state) => state.userRole.role);
-    //const dispatch = useDispatch();
-
+    
+    const handleChange = (event) => {
+        const selectedNationality = event.target.value;
+        dispatch(setNationalityId(selectedNationality));
+    };
 
     // Load student data when it becomes available
     useEffect(() => {
-        if (studentData) {
-            console.log(studentData)
-            setFirstName(studentData.studentData.firstName || '');
-            setLastName(studentData.studentData.lastName || '');
-            setDob(studentData.studentData.dateOfBirth || new Date());
+        if (student) {
+            setFirstName(student.firstName || '');
+            setLastName(student.lastName || '');
+            setDob(student.dateOfBirth || new Date());
         }
-    }, [studentData]);
+    }, [student]);
 
     // Handle form submission
     const handleSubmit = (e) => {
-        //e.preventDefault(); // Prevent page refresh
+        e.preventDefault(); // Prevent page refresh
 
-        //// Create an object with the form data
-        //const formData = {
-        //    firstName,
-        //    lastName,
-        //    dateOfBirth
-        //};
+        // Create an object with the form data
+        const formData = {
+            firstName,
+            lastName,
+            dateOfBirth
+        };
 
         //console.log(formData);
 
@@ -66,11 +71,19 @@ const StudentForm = (studentData) => {
                 />
             </label>
             <br />
-            <button type="submit">Submit</button>
+            <label>
+                Nationality:
+                <select value={nationalityId} onChange={handleChange}>
+                    {nationalities.map((nationality) =>
+                        <option key={nationality.Id} value={nationality.Id}>{nationality.name} {nationality.country}</option>
+                    )}
+                </select>
+            </label>
 
-            {/*<p>*/}
-            {/*    First Name: {firstName}, Last Name: {lastName} Date Of Birth: {dateOfBirth}*/}
-            {/*</p>*/}
+
+            
+            <br />
+            <button type="submit">Submit</button>
         </form>
     );
 }
