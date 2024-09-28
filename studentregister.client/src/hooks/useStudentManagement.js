@@ -21,7 +21,7 @@ const useStudentManagement = () => {
     }, [studentStatus, dispatch]);
 
     // Student list refresh: Update status
-    const handleRefresh = () => {
+    const handleStudentListRefresh = () => {
         dispatch(refreshStudent());
     };
 
@@ -37,7 +37,7 @@ const useStudentManagement = () => {
         try {
             // Dispatch the createAsyncThunk to add the student
             await dispatch(addStudent(student)).unwrap(); // Ensure the action is completed
-            handleRefresh(); // Refresh the student list
+            handleStudentListRefresh(); // Refresh the student list
             navigate('/'); // Redirect to the home page
         } catch (error) {
             console.error('Failed to add student:', error);
@@ -51,6 +51,8 @@ const useStudentManagement = () => {
         setDob(new Date().toISOString().substring(0, 10)); // Reset to today
     };
 
+    const navigateToHome = () => navigate('/');
+
     return {
         firstName,
         lastName,
@@ -60,7 +62,8 @@ const useStudentManagement = () => {
         setDob,
         handleAddStudentSubmit,
         handleReset,
-        handleRefresh,
+        handleStudentListRefresh,
+        navigateToHome,
     };
 };
 

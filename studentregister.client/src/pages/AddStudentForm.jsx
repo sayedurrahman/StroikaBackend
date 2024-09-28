@@ -1,3 +1,4 @@
+import { Container, Form, Button } from 'react-bootstrap';
 import useStudentManagement from '../hooks/useStudentManagement';
 
 const AddStudentForm = () => {
@@ -10,42 +11,52 @@ const AddStudentForm = () => {
         setDob,
         handleAddStudentSubmit,
         handleReset,
+        navigateToHome
     } = useStudentManagement();
 
     return (
-        <div>
-            <h2>Add a New Student</h2>
-            <form onSubmit={handleAddStudentSubmit}>
-                <label>
-                    First name:
-                    <input
+        <Container className="mt-5">
+            <h2>Add Student</h2>
+            <Form onSubmit={handleAddStudentSubmit}>
+                <Form.Group className="mb-3">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter first name"
                         value={firstName}
-                        onChange={e => setFirstName(e.target.value)}
+                        onChange={(e) => setFirstName(e.target.value)}
                     />
-                </label>
-                <br />
-                <label>
-                    Last name:
-                    <input
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter last name"
                         value={lastName}
-                        onChange={e => setLastName(e.target.value)}
+                        onChange={(e) => setLastName(e.target.value)}
                     />
-                </label>
-                <br />
-                <label>
-                    Date Of Birth:
-                    <input
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Date of Birth</Form.Label>
+                    <Form.Control
                         type="date"
                         value={dob}
-                        onChange={e => setDob(e.target.value)}
+                        onChange={(e) => setDob(e.target.value)}
                     />
-                </label>
-                <br />
-                <br />
-                <button type="submit">Submit </button>
-                <button type="button" onClick={handleReset}>Reset</button>
-            </form>
-        </div>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Add Student
+                </Button>
+                <Button variant="warning" className="ms-2" onClick={handleReset}>
+                    Reset
+                </Button>
+                <Button variant="secondary" className="ms-2" onClick={navigateToHome}>
+                    Cancel
+                </Button>
+            </Form>
+        </Container>
     );
 }
 

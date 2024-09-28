@@ -12,7 +12,7 @@ export const addStudent = createAsyncThunk('students/addStudent',
                 body: JSON.stringify({
                     firstName: studentData.firstName.trim(),
                     lastName: studentData.lastName.trim(),
-                    dateOfBirth: studentData.dateOfBirth, // Send only the date part
+                    dateOfBirth: studentData.dateOfBirth, 
                 }),
             });
 

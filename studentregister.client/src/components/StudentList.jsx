@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchStudents } from '../features/StudentListSlice';
 import Modal from 'react-modal';
 import StudentForm from './StudentForm';
+import { Link } from 'react-router-dom';
+import { Container, Button, Table } from 'react-bootstrap';
 
 const StudentList = () => {
     const dispatch = useDispatch();
@@ -41,9 +43,12 @@ const StudentList = () => {
     }
 
     return (
-        <div>
+        <Container className="mt-5">
             <h2>Student List</h2>
-            <table className="table table-striped" aria-labelledby="tableLabel">
+            <Link to="/add-student">
+                <Button variant="primary" className="mb-3">Add New Student</Button>
+            </Link>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -64,7 +69,7 @@ const StudentList = () => {
                         </tr>
                     )}
                 </tbody>
-            </table>
+            </Table>
 
             {/* Modal Component */}
             <Modal
@@ -84,10 +89,10 @@ const StudentList = () => {
             >
                 <div>
                     <StudentForm studentData={selectedStudent} />
-                    <button onClick={closeModal}>Close</button>
+                    <button onClick={closeModal} className="btn btn-secondary mt-3">Close</button>
                 </div>
             </Modal>
-        </div>
+        </Container>
     );
 }
 

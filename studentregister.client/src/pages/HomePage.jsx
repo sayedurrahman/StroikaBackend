@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import { fetchNationalities } from '../features/NationalitySlice';
 import UserRole from '../components/UserRole';
 import StudentList from '../components/StudentList';
@@ -21,7 +21,7 @@ function HomePage() {
         <div>
             <UserRole />
             <StudentList />
-            <Link to="/add-student">Add Student</Link>
+            
         </div>
     );
 }
