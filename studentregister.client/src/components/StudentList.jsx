@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchStudents } from '../features/StudentListSlice';
 import Modal from 'react-modal';
+import StudentForm from './StudentForm';
 
 const StudentList = () => {
     const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const StudentList = () => {
 
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    Modal.setAppElement('#root'); // To prevent screen readers from interacting with content outside the modal
 
     const openModal = (student) => {
         setSelectedStudent(student);
@@ -79,13 +82,10 @@ const StudentList = () => {
                     },
                 }}
             >
-                {selectedStudent && (
-                    <div>
-                        <h2>{ selectedStudent.firstName} {selectedStudent.lastName}</h2>
-                        <p><strong>DOB:</strong> {selectedStudent.dateOfBirth}</p>
-                        <button onClick={closeModal}>Close</button>
-                    </div>
-                )}
+                <div>
+                    <StudentForm studentData={selectedStudent} />
+                    <button onClick={closeModal}>Close</button>
+                </div>
             </Modal>
         </div>
     );
