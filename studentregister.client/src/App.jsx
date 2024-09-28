@@ -1,50 +1,51 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import UserRole from './components/UserRole';
-
+import StudentList from './components/StudentList';
+ 
 function App() {
-    const [students, setStudents] = useState([]);
+    //const [students, setStudents] = useState([]);
 
-    useEffect(() => {
-        LoadStudents();
-    }, []);
+    //useEffect(() => {
+    //    LoadStudents();
+    //}, []);
 
-    const contents = students === undefined
-        ? <p><em>Loading... Please refresh </em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Date of Birth</th>
-                </tr>
-            </thead>
-            <tbody>
-                {students.map((forecast) =>
-                    <tr key={forecast.id}>
-                        <td>{forecast.id}</td>
-                        <td>{forecast.firstName}</td>
-                        <td>{forecast.lastName}</td>
-                        <td>{forecast.dateOfBirth}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
+    //const contents = students === undefined
+    //    ? <p><em>Loading... Please refresh </em></p>
+    //    : <table className="table table-striped" aria-labelledby="tableLabel">
+    //        <thead>
+    //            <tr>
+    //                <th>Id</th>
+    //                <th>First Name</th>
+    //                <th>Last Name</th>
+    //                <th>Date of Birth</th>
+    //            </tr>
+    //        </thead>
+    //        <tbody>
+    //            {students.map((student) =>
+    //                <tr key={student.id}>
+    //                    <td>{student.id}</td>
+    //                    <td>{student.firstName}</td>
+    //                    <td>{student.lastName}</td>
+    //                    <td>{student.dateOfBirth}</td>
+    //                </tr>
+    //            )}
+    //        </tbody>
+    //    </table>;
 
     return (
         <div>
             <UserRole />
-            <h1 id="tableLabel">Students</h1>
-            {contents}
+            <StudentList />
+              {/*{contents}*/}
         </div>
     );
     
-    async function LoadStudents() {
-        const response = await fetch('/core/api/Students');
-        const data = await response.json();
-        setStudents(data);
-    }
+    //async function LoadStudents() {
+    //    const response = await fetch('/core/api/Students');
+    //    const data = await response.json();
+    //    setStudents(data);
+    //}
 }
 
 export default App;
