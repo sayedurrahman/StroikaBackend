@@ -2,21 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial state
 const initialState = {
-    role: "admin"
+    role: "Admin"
 };
 
 const userRoleSlice = createSlice({
     name: "userRole",
     initialState,
     reducers: {
-        toggleRole: (state) => {
-            state.role = state.role === 'admin' ? 'register' : 'admin'
+        setAdmin: (state) => {
+            state.role = 'Admin'
+        },
+        setRegistrar: (state) => {
+            state.role = 'Registrar'
         }
     }
 });
 
 // Export actions
-export const { toggleRole } = userRoleSlice.actions
+export const { setAdmin, setRegistrar } = userRoleSlice.actions
 
 // Export reducer
 export default userRoleSlice.reducer;

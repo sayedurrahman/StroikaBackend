@@ -1,16 +1,25 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleRole } from '../features/UserRoleSlice';
+import { setAdmin, setRegistrar } from '../features/UserRoleSlice';
 
 const UserRole = () => {
     const role = useSelector((state) => state.userRole.role);
     const dispatch = useDispatch();
 
+    const handleChange = (event) => {
+        const selectedRole = event.target.value;
+        if (selectedRole === 'Admin') {
+            dispatch(setAdmin());
+        } else if (selectedRole === 'Registrar') {
+            dispatch(setRegistrar());
+        }
+    };
+
     return (
         <div>
             <header>
                 <h2>Current Role: {role}</h2>
-                <select value={role} onChange={(e) => dispatch(toggleRole())}>
+                <select value={role} onChange={handleChange}>
                     <option value="Admin">Admin</option>
                     <option value="Registrar">Registrar</option>
                 </select>
