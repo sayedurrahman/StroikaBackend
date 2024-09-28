@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentRegister.Application;
 using StudentRegister.Models.Commands;
+using StudentRegister.Models.DTOs;
 using StudentRegister.Models.Queries;
 
 namespace StudentRegister.Controllers
@@ -24,12 +25,12 @@ namespace StudentRegister.Controllers
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
-        /// <param name="dob"></param>
+        /// <param name="dateOfBirth"></param>
         /// <returns>Json: Newly added StudentDTO</returns>
         [HttpPost]
-        public IActionResult Post(string firstName, string lastName, DateTime dob)
+        public IActionResult Post([FromBody] StudentDTO student)
         {
-            var command = new AddStudentCommand { FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            var command = new AddStudentCommand { FirstName = student.FirstName, LastName = student.LastName, DateOfBirth = student.DateOfBirth };
             return Ok(studentServices.AddStudent(command));
         }
 
