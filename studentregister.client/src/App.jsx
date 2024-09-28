@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import UserRole from './components/UserRole';
 
 function App() {
     const [students, setStudents] = useState([]);
@@ -33,6 +34,7 @@ function App() {
 
     return (
         <div>
+            <UserRole />
             <h1 id="tableLabel">Students</h1>
             {contents}
         </div>
