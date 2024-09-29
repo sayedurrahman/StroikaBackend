@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchNationalities } from '../features/NationalitySlice';
 import UserRole from '../components/UserRole';
 import StudentList from '../components/StudentList';
-import ParentComponent from '../components/ParentComponent';
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -22,7 +21,6 @@ function HomePage() {
         <div>
             <UserRole />
             <StudentList />
-            <ParentComponent />
         </div>
     );
 }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchStudents } from '../features/StudentListSlice';
-import Modal from 'react-modal';
-import StudentForm from './StudentForm';
 import { Link } from 'react-router-dom';
 import { Container, Button, Table } from 'react-bootstrap';
 import UpdateStudentModal from './UpdateStudentModal';

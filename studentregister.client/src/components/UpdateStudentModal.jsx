@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
 
 const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
+    const nationalities = useSelector((state) => state.nationalities.nationalities);
     const [student, setStudent] = useState({
         firstName: '',
         lastName: '',
@@ -36,7 +38,7 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
         setStudent({
             ...student,
             familyMembers: [
-                ...student.familyMembers,
+                ...(Array.isArray(student.familyMembers) ? student.familyMembers : []),
                 { firstName: '', lastName: '', dob: '', nationalityId: '', relationId: '' },
             ],
         });
@@ -99,14 +101,14 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Form.Group>
-                                <Form.Label>Nationality ID</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="nationalityId"
-                                    value={student.nationalityId}
-                                    onChange={handleChange}
-                                />
+                            <Form.Group className="mb-3">
+                                <Form.Label>Nationality</Form.Label>
+                                <Form.Select name="nationalityId" aria-label="Default select example" value={student.nationalityId} onChange={handleChange}>
+                                    <option key='0' value='0'>Select a nationality</option>
+                                    {nationalities.map((nationality) =>
+                                        <option key={nationality.id} value={nationality.id} >{nationality.name}</option>
+                                    )}
+                                </Form.Select>
                             </Form.Group>
                         </Col>
                     </Row>
