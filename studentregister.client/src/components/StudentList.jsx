@@ -44,7 +44,6 @@ const StudentList = () => {
 
     return (
         <Container className="mt-5">
-            <h2>Student List</h2>
             <Link to="/add-student">
                 <Button variant="primary" className="mb-3">Add New Student</Button>
             </Link>

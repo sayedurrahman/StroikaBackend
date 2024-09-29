@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAdmin, setRegistrar } from '../features/UserRoleSlice';
+import { Form } from 'react-bootstrap';
+
 
 const UserRole = () => {
     const role = useSelector((state) => state.userRole.role);
@@ -17,13 +19,11 @@ const UserRole = () => {
 
     return (
         <div>
-            <header>
-                <select value={role} onChange={handleChange}>
-                    <option value="Admin">Admin</option>
-                    <option value="Registrar">Registrar</option>
-                </select>
-                <h1>{role} Dashboard</h1>
-            </header>
+            <Form.Select aria-label="Default select example" value={role} onChange={handleChange}>
+                <option value="Admin">Admin</option>
+                <option value="Registrar">Registrar</option>
+            </Form.Select>
+            <h1>{role} Dashboard - Student List</h1>
         </div>
     );
 }
