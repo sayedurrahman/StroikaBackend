@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import useStudentData from '../hooks/useStudentData'; 
 
 const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
+    const userRole = useSelector((state) => state.userRole.role);
     const nationalities = useSelector((state) => state.nationalities.nationalities);
     const {
         student,
@@ -36,6 +37,7 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                                     name="firstName"
                                     value={student.firstName}
                                     onChange={handleChange}
+                                    disabled={userRole === 'Admin'}
                                 />
                             </Form.Group>
                         </Col>
@@ -47,6 +49,7 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                                     name="lastName"
                                     value={student.lastName}
                                     onChange={handleChange}
+                                    disabled={userRole === 'Admin'}
                                 />
                             </Form.Group>
                         </Col>
@@ -60,13 +63,14 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                                     name="dob"
                                     value={student.dob}
                                     onChange={handleChange}
+                                    disabled={userRole === 'Admin'}
                                 />
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group className="mb-3">
                                 <Form.Label>Nationality</Form.Label>
-                                <Form.Select name="nationalityId" value={student.nationalityId} onChange={handleChange}>
+                                <Form.Select name="nationalityId" value={student.nationalityId} onChange={handleChange} disabled={userRole === 'Admin'}>
                                     <option key='0' value='0'>Select a nationality</option>
                                     {nationalities.map((nationality) =>
                                         <option key={nationality.id} value={nationality.id} >{nationality.name}</option>
