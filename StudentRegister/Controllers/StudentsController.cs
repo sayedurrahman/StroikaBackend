@@ -18,14 +18,12 @@ namespace StudentRegister.Controllers
             this.studentServices = studentServices;
             this.familyMemberService = familyMemberService;
         }
-
+      
         /// <summary>
         /// POST api/Students
         /// Add new student
         /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="dateOfBirth"></param>
+        /// <param name="student"></param>
         /// <returns>Json: Newly added StudentDTO</returns>
         [HttpPost]
         public IActionResult Post([FromBody] StudentDTO student)
@@ -38,15 +36,12 @@ namespace StudentRegister.Controllers
         /// PUT api/Students/{id}
         /// Update student
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="dob"></param>
+        /// <param name="student"></param>
         /// <returns>Json: Updated student</returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, string firstName, string lastName, DateTime dob)
+        public IActionResult Put([FromBody] StudentDTO student)
         {
-            var command = new UpdateStudentCommand { Id = id, FirstName = firstName, LastName = lastName, DateOfBirth = dob };
+            var command = new UpdateStudentCommand { Id = student.ID, FirstName = student.FirstName, LastName = student.LastName, DateOfBirth = student.DateOfBirth };
             return Ok(studentServices.UpdateStudent(command));
         }
 
@@ -69,15 +64,12 @@ namespace StudentRegister.Controllers
         /// Add family member
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="dob"></param>
-        /// <param name="relationshipId"></param>
+        /// <param name="AddFamilyMemberDTO"></param>
         /// <returns>Json: Newly added family member</returns>
         [HttpPost("{id}/FamilyMembers")]
-        public IActionResult AddFamilyMemberOfStudent(int id, string firstName, string lastName, DateTime dob, int relationshipId)
+        public IActionResult AddFamilyMemberOfStudent(int id, [FromBody] AddFamilyMemberDTO familyMember)
         {
-            var command = new AddFamilyMemberCommand { StudentId = id, FirstName = firstName, LastName = lastName, DateOfBirth = dob, RelationshipId = relationshipId };
+            var command = new AddFamilyMemberCommand { StudentId = id, FirstName = familyMember.FirstName, LastName = familyMember.LastName, DateOfBirth = familyMember.Dbo, RelationshipId = familyMember.relationId };
             return Ok(familyMemberService.AddStudentFamilyMember(command));
         }
 

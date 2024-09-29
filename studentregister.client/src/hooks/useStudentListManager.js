@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStudents } from '../features/StudentListSlice';
-import { updateStudentNationality } from '../apis/studentApi';
+import { updateStudentNationality, createFamilyMember } from '../apis/studentApi';
+import { updateFamilyMemberNationality } from "../apis/familymemberapi.js"
 
 const useStudentListManager = () => {
     const dispatch = useDispatch();
@@ -28,11 +29,24 @@ const useStudentListManager = () => {
         setIsModalOpen(false);
     };
 
-    const saveStudent = (updatedStudent) => {
+    const saveStudent = async (updatedStudent) => {
+        console.log("Updated:", updatedStudent);
         updateStudentNationality(updatedStudent.id, updatedStudent.nationalityId);
-        // Add additional update logic if needed
+
+        if (updatedStudent.familyMembers && updatedStudent.familyMembers.length > 0) {
+            updatedStudent.familyMembers.map((fm) => {
+                AddNewFamilyMember(updatedStudent.id, fm);
+                console.log(fm); // Example: Logging each family member
+            });
+        }
+        
         closeModal();
     };
+
+    const AddNewFamilyMember = async (studentId, familyMember) => {
+        const data = await createFamilyMember(studentId, familyMember);
+        await updateFamilyMemberNationality(data.id, familyMember.nationalityId);
+    }
 
     return {
         students,
