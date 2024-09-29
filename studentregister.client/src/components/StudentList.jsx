@@ -1,3 +1,4 @@
+import { updateStudentNationality, updateStudentDetails } from "../apis/studentapi"
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchStudents } from '../features/StudentListSlice';
@@ -28,7 +29,11 @@ const StudentList = () => {
 
     const handleSaveStudent = (updatedStudent) => {
         console.log('Updated Student:', updatedStudent);
+        updateStudentNationality(updatedStudent.id, updatedStudent.nationalityId);
         // Perform API call or state update logic here
+        // if student has nationality make a update call
+        // if existing family member found update
+        // If fm are new add those
         handleCloseModal();
     };
 

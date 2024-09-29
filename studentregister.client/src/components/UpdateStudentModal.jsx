@@ -1,54 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import useStudentData from '../hooks/useStudentData'; 
 
 const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
     const nationalities = useSelector((state) => state.nationalities.nationalities);
-    const [student, setStudent] = useState({
-        firstName: '',
-        lastName: '',
-        dob: '',
-        nationalityId: '',
-        familyMembers: [],
-    });
-
-    // Initialize state with student data when modal opens
-    useEffect(() => {
-        if (studentData) {
-            setStudent({ ...studentData });
-        }
-    }, [studentData]);
-
-    // Handle input change for the main student information
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setStudent({ ...student, [name]: value });
-    };
-
-    // Handle family member input change
-    const handleFamilyMemberChange = (index, e) => {
-        const { name, value } = e.target;
-        const updatedFamilyMembers = [...student.familyMembers];
-        updatedFamilyMembers[index] = { ...updatedFamilyMembers[index], [name]: value };
-        setStudent({ ...student, familyMembers: updatedFamilyMembers });
-    };
-
-    // Add a new family member
-    const addFamilyMember = () => {
-        setStudent({
-            ...student,
-            familyMembers: [
-                ...(Array.isArray(student.familyMembers) ? student.familyMembers : []),
-                { firstName: '', lastName: '', dob: '', nationalityId: '', relationId: '' },
-            ],
-        });
-    };
-
-    // Delete a family member
-    const deleteFamilyMember = (index) => {
-        const updatedFamilyMembers = student.familyMembers.filter((_, i) => i !== index);
-        setStudent({ ...student, familyMembers: updatedFamilyMembers });
-    };
+    const {
+        student,
+        handleChange,
+        handleFamilyMemberChange,
+        addFamilyMember,
+        deleteFamilyMember,
+    } = useStudentData(studentData);
 
     // Handle form submission
     const handleSubmit = (e) => {
@@ -103,7 +66,7 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                         <Col>
                             <Form.Group className="mb-3">
                                 <Form.Label>Nationality</Form.Label>
-                                <Form.Select name="nationalityId" aria-label="Default select example" value={student.nationalityId} onChange={handleChange}>
+                                <Form.Select name="nationalityId" value={student.nationalityId} onChange={handleChange}>
                                     <option key='0' value='0'>Select a nationality</option>
                                     {nationalities.map((nationality) =>
                                         <option key={nationality.id} value={nationality.id} >{nationality.name}</option>
@@ -117,75 +80,75 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                     <h5>Family Members</h5>
                     {student.familyMembers && student.familyMembers.length > 0 &&
                         student.familyMembers.map((member, index) => (
-                        <div key={index} className="mb-3 border p-3">
-                            <Row>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>First Name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="firstName"
-                                            value={member.firstName}
-                                            onChange={(e) => handleFamilyMemberChange(index, e)}
-                                        />
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Last Name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="lastName"
-                                            value={member.lastName}
-                                            onChange={(e) => handleFamilyMemberChange(index, e)}
-                                        />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Date of Birth</Form.Label>
-                                        <Form.Control
-                                            type="date"
-                                            name="dob"
-                                            value={member.dob}
-                                            onChange={(e) => handleFamilyMemberChange(index, e)}
-                                        />
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Nationality ID</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            name="nationalityId"
-                                            value={member.nationalityId}
-                                            onChange={(e) => handleFamilyMemberChange(index, e)}
-                                        />
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group>
-                                        <Form.Label>Relation ID</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            name="relationId"
-                                            value={member.relationId}
-                                            onChange={(e) => handleFamilyMemberChange(index, e)}
-                                        />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Button
-                                variant="danger"
-                                className="mt-2"
-                                onClick={() => deleteFamilyMember(index)}
-                            >
-                                Delete Family Member
-                            </Button>
-                        </div>
-                    ))}
+                            <div key={index} className="mb-3 border p-3">
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>First Name</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                name="firstName"
+                                                value={member.firstName}
+                                                onChange={(e) => handleFamilyMemberChange(index, e)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Last Name</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                name="lastName"
+                                                value={member.lastName}
+                                                onChange={(e) => handleFamilyMemberChange(index, e)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Date of Birth</Form.Label>
+                                            <Form.Control
+                                                type="date"
+                                                name="dob"
+                                                value={member.dob}
+                                                onChange={(e) => handleFamilyMemberChange(index, e)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Nationality ID</Form.Label>
+                                            <Form.Select name="nationalityId" value={member.nationalityId} onChange={(e) => handleFamilyMemberChange(index, e)}>
+                                                <option key='0' value='0'>Select a nationality</option>
+                                                {nationalities.map((nationality) =>
+                                                    <option key={nationality.id} value={nationality.id} >{nationality.name}</option>
+                                                )}
+                                            </Form.Select>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Relation ID</Form.Label>
+                                            <Form.Select name="relationId" value={member.relationId} onChange={(e) => handleFamilyMemberChange(index, e)}>
+                                                <option key='0' value='0'>Select a Relation</option>
+                                                <option key='1' value='1' >Parent</option>
+                                                <option key='2' value='2' >Sibling</option>
+                                                <option key='3' value='3' >Spouse</option>
+                                            </Form.Select>
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Button
+                                    variant="danger"
+                                    className="mt-2"
+                                    onClick={() => deleteFamilyMember(index)}
+                                >
+                                    Delete Family Member
+                                </Button>
+                            </div>
+                        ))}
                     <Button variant="primary" onClick={addFamilyMember} className="mb-3">
                         Add Family Member
                     </Button>
