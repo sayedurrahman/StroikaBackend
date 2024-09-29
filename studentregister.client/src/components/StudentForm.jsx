@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 const StudentForm = (props) => {
@@ -10,7 +11,7 @@ const StudentForm = (props) => {
     const dispatch = useDispatch();
     const student = props.studentData;
     //const role = useSelector((state) => state.userRole.role);
-    
+
     const handleChange = (event) => {
         const selectedNationality = event.target.value;
         dispatch(setNationalityId(selectedNationality));
@@ -45,46 +46,51 @@ const StudentForm = (props) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                First name:
-                <input
-                    value={firstName}
-                    onChange={e => setFirstName(e.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Last name:
-                <input
-                    value={lastName}
-                    onChange={e => setLastName(e.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Date Of Birth:
-                <input
-                    type="datetime-local"
-                    value={dateOfBirth}
-                    onChange={e => setDob(e.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Nationality:
-                <select value={nationalityId} onChange={handleChange}>
-                    {nationalities.map((nationality) =>
-                        <option key={nationality.Id} value={nationality.Id}>{nationality.name} {nationality.country}</option>
-                    )}
-                </select>
-            </label>
+        <Container className="mt-5">
+            <h2>Update Student</h2>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter first name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter last name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Date Of Birth</Form.Label>
+                    <Form.Control
+                        required
+                        type="date"
+                        value={dateOfBirth}
+                        onChange={(e) => setDob(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Nationality</Form.Label>
+                    <Form.Select aria-label="Default select example" value={nationalityId} onChange={handleChange}>
+                        {nationalities.map((nationality) =>
+                            <option key={nationality.Id} value={nationality.Id}>{nationality.name} {nationality.country}</option>
+                        )}
+                    </Form.Select>
+                </Form.Group>
 
-
-            
-            <br />
-            <button type="submit">Submit</button>
-        </form>
+                <br />
+                <button type="submit">Submit</button>
+            </Form>
+        </Container>
     );
 }
 
