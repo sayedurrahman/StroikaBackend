@@ -113,7 +113,8 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
 
                     {/* Family Members Section */}
                     <h5>Family Members</h5>
-                    {student.familyMembers.map((member, index) => (
+                    {student.familyMembers && student.familyMembers.length > 0 &&
+                        student.familyMembers.map((member, index) => (
                         <div key={index} className="mb-3 border p-3">
                             <Row>
                                 <Col>

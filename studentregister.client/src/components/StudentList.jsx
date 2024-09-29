@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import StudentForm from './StudentForm';
 import { Link } from 'react-router-dom';
 import { Container, Button, Table } from 'react-bootstrap';
+import UpdateStudentModal from './UpdateStudentModal';
 
 const StudentList = () => {
     const dispatch = useDispatch();
@@ -15,16 +16,22 @@ const StudentList = () => {
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
-    Modal.setAppElement('#root'); // To prevent screen readers from interacting with content outside the modal
+    //Modal.setAppElement('#root'); // To prevent screen readers from interacting with content outside the modal
 
     const openModal = (student) => {
         setSelectedStudent(student);
         setIsModalOpen(true);
     };
 
-    const closeModal = () => {
+    const handleCloseModal = () => {
         setSelectedStudent(null);
         setIsModalOpen(false);
+    };
+
+    const handleSaveStudent = (updatedStudent) => {
+        console.log('Updated Student:', updatedStudent);
+        // Perform API call or state update logic here
+        handleCloseModal();
     };
 
     // Fetch students data when the component mounts
@@ -70,27 +77,12 @@ const StudentList = () => {
                 </tbody>
             </Table>
 
-            {/* Modal Component */}
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                contentLabel="Student Details"
-                style={{
-                    content: {
-                        top: '50%',
-                        left: '50%',
-                        right: 'auto',
-                        bottom: 'auto',
-                        marginRight: '-50%',
-                        transform: 'translate(-50%, -50%)',
-                    },
-                }}
-            >
-                <div>
-                    <StudentForm studentData={selectedStudent} />
-                    <button onClick={closeModal} className="btn btn-secondary mt-3">Close</button>
-                </div>
-            </Modal>
+            <UpdateStudentModal
+                show={isModalOpen}
+                handleClose={handleCloseModal}
+                studentData={selectedStudent}
+                handleSave={handleSaveStudent}
+            />
         </Container>
     );
 }
