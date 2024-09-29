@@ -1,48 +1,19 @@
-import { updateStudentNationality, updateStudentDetails } from "../apis/studentapi"
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchStudents } from '../features/StudentListSlice';
 import { Link } from 'react-router-dom';
 import { Container, Button, Table } from 'react-bootstrap';
 import UpdateStudentModal from './UpdateStudentModal';
+import useStudentListManager from '../hooks/useStudentListManager';
 
 const StudentList = () => {
-    const dispatch = useDispatch();
-    const students = useSelector((state) => state.students.students);
-    const status = useSelector((state) => state.students.status);
-    const error = useSelector((state) => state.students.error);
-
-    const [selectedStudent, setSelectedStudent] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    
-    //Modal.setAppElement('#root'); // To prevent screen readers from interacting with content outside the modal
-
-    const openModal = (student) => {
-        setSelectedStudent(student);
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setSelectedStudent(null);
-        setIsModalOpen(false);
-    };
-
-    const handleSaveStudent = (updatedStudent) => {
-        console.log('Updated Student:', updatedStudent);
-        updateStudentNationality(updatedStudent.id, updatedStudent.nationalityId);
-        // Perform API call or state update logic here
-        // if student has nationality make a update call
-        // if existing family member found update
-        // If fm are new add those
-        handleCloseModal();
-    };
-
-    // Fetch students data when the component mounts
-    useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchStudents());
-        }
-    }, [status, dispatch]);
+    const {
+        students,
+        status,
+        error,
+        selectedStudent,
+        isModalOpen,
+        openModal,
+        closeModal,
+        saveStudent,
+    } = useStudentListManager();
 
     if (status === 'loading') {
         return <div>Loading...</div>;
@@ -67,27 +38,27 @@ const StudentList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map((student) =>
+                    {students.map((student) => (
                         <tr key={student.id}
                             onClick={() => openModal(student)}
-                            style={{ cursor: 'pointer', padding: '5px', border: '1px solid #ddd', margin: '5px 0' }} >
+                            style={{ cursor: 'pointer', padding: '5px', border: '1px solid #ddd', margin: '5px 0' }}>
                             <td>{student.id}</td>
                             <td>{student.firstName}</td>
                             <td>{student.lastName}</td>
-                            <td>{student.dateOfBirth}</td>
+                            <td>{new Date(student.dateOfBirth).toISOString().split('T')[0]}</td>
                         </tr>
-                    )}
+                    ))}
                 </tbody>
             </Table>
 
             <UpdateStudentModal
                 show={isModalOpen}
-                handleClose={handleCloseModal}
+                handleClose={closeModal}
                 studentData={selectedStudent}
-                handleSave={handleSaveStudent}
+                handleSave={saveStudent}
             />
         </Container>
     );
-}
+};
 
 export default StudentList;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import useStudentData from '../hooks/useStudentData'; 
@@ -56,6 +55,7 @@ const UpdateStudentModal = ({ show, handleClose, studentData, handleSave }) => {
                     </Row>
                     <Row className="mb-3">
                         <Col>
+                            {console.log(student.dob)}
                             <Form.Group>
                                 <Form.Label>Date of Birth</Form.Label>
                                 <Form.Control

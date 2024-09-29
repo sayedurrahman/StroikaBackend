@@ -5,7 +5,6 @@ import AddStudentForm from './pages/AddStudentForm';
 
  
 function App() {
-
     return (
         <Router>
             <Routes>
